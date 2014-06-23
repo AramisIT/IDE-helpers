@@ -1,0 +1,20 @@
+using System;
+using Aramis.Attributes;
+using Aramis.DatabaseConnector;
+using Aramis.Enums;
+using Aramis.Core;
+using Aramis.SystemConfigurations;
+using Catalogs;
+
+namespace Catalogs
+    {{    
+    [Catalog(Description = "", GUID = "{0}", DescriptionSize = 35, HierarchicType = HierarchicTypes.None)]
+    public class {1} : CatalogTable
+        {{
+        public {1}()
+            : base()
+            {{
+            
+            }}
+        }}
+    }}

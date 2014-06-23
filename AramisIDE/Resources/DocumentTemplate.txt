@@ -1,0 +1,20 @@
+using System;
+using Aramis.Attributes;
+using Aramis.DatabaseConnector;
+using Aramis.Enums;
+using Aramis.Core;
+using Aramis.SystemConfigurations;
+using Catalogs;
+
+namespace Documents
+    {{    
+    [Document(Description = "", GUID = "{0}")]
+    public class {1} : DocumentTable
+        {{
+        public {1}()
+            : base()
+            {{
+            
+            }}
+        }}
+    }}
