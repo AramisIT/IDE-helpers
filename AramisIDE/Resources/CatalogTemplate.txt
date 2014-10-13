@@ -8,13 +8,15 @@ using Catalogs;
 
 namespace Catalogs
     {{    
-    [Catalog(Description = "", GUID = "{0}", DescriptionSize = 35, HierarchicType = HierarchicTypes.None)]
-    public class {1} : CatalogTable
+    [Catalog(Description = "", GUID = "{0}", DescriptionSize = 35, ShowCodeFieldInForm = false, ShowCreationDate = true, ShowLastModifiedDate = true)]
+    public interface {1} : ICatalog
+        {{    
+		Table<IExsTable> ExsTable {{ get; }}  
+        }}        
+
+    public interface IExsTable : ITableRow
         {{
-        public {1}()
-            : base()
-            {{
-            
-            }}
+        [DataField(Description = "")]
+        Ref<IExsCatalog> ExsField {{ get; set; }}      
         }}
     }}

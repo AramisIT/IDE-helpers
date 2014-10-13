@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Actions\BaseAction.cs" />
     <Compile Include="Actions\CatalogGuid.cs" />
+    <Compile Include="Actions\CurrentDayPeriod.cs" />
     <Compile Include="Actions\NewCatalog.cs" />
     <Compile Include="Actions\NewDocument.cs" />
     <Compile Include="Actions\DocumentGuid.cs" />

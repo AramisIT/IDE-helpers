@@ -15,11 +15,19 @@ namespace AramisIDE.Interface
             MakeDocument,
             MakeCatalogGuid,
             MakeDocumentGuid,
+            StartDateAndFinishDate,
             ShowProperties,
             Quit
             }
 
-        private List<string> menuDescriptions = new List<string>() { "Make catalog Win-Alt-C", "Make document Win-Alt-L", "Make catalog guid", "Make document guid", "Show properties", "Quit" };
+        private List<string> menuDescriptions = new List<string>() { 
+        "Make catalog Win-Alt-C", 
+        "Make document Win-Alt-L", 
+        "Make catalog guid", 
+        "Make document guid", 
+        "StartDate and FinishDate",
+        "Show properties",
+        "Quit" };
 
         private MainForm mainForm;
         private NotifyIcon trayIcon;
@@ -78,6 +86,10 @@ namespace AramisIDE.Interface
 
                 case MenuItems.MakeDocumentGuid:
                     new DocumentGuid();
+                    return;
+
+                case MenuItems.StartDateAndFinishDate:
+                    new CurrentDayPeriod();
                     return;
 
                 case MenuItems.MakeDocument:

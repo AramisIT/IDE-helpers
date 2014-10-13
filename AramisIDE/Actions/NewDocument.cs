@@ -12,9 +12,13 @@ namespace AramisIDE.Actions
             {
             string tableName = string.Empty;
             var clipboard = FromClipboard();
-            if (clipboard.EndsWith("*"))
+            if (clipboard.Length > 100 || String.IsNullOrEmpty(clipboard) || clipboard.Contains(" "))
                 {
-                tableName = clipboard.Substring(0, clipboard.Length - 1).Trim();
+                tableName = "ITEM_NAME";
+                }
+            else
+                {
+                tableName = clipboard;
                 }
 
             var guid = new GuidGenerator('0').NewGuid;
