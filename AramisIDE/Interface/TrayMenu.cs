@@ -17,6 +17,7 @@ namespace AramisIDE.Interface
             MakeDocumentGuid,
             StartDateAndFinishDate,
             ShowProperties,
+            CreateRestoreScript,
             Quit
             }
 
@@ -27,6 +28,7 @@ namespace AramisIDE.Interface
         "Make document guid", 
         "StartDate and FinishDate",
         "Show properties",
+        "Create restore script",
         "Quit" };
 
         private MainForm mainForm;
@@ -78,6 +80,10 @@ namespace AramisIDE.Interface
 
                 case MenuItems.ShowProperties:
                     mainForm.ShowForm();
+                    return;
+
+                case MenuItems.CreateRestoreScript:
+                    new RestoreScriptCreator();
                     return;
 
                 case MenuItems.MakeCatalogGuid:

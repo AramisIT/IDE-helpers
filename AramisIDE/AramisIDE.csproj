@@ -53,6 +53,7 @@
     <Compile Include="Actions\NewCatalog.cs" />
     <Compile Include="Actions\NewDocument.cs" />
     <Compile Include="Actions\DocumentGuid.cs" />
+    <Compile Include="Actions\RestoreScriptCreator.cs" />
     <Compile Include="HotKeysManager.cs" />
     <Compile Include="Utils\KeyboardHook.cs" />
     <Compile Include="Utils\GuidGenerator.cs" />
@@ -90,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\RestoreSqlCommand.txt" />
     <None Include="Resources\CatalogTemplate.txt" />
     <None Include="Resources\DocumentTemplate.txt" />
     <None Include="Images\icon.ico" />
