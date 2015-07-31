@@ -1,0 +1,66 @@
+﻿<Root>
+  <Solution Name="Sandbox" Url="http://localhost:50258">
+    <FilesGroup Type="WebScripts" Path="X:\My work\Projects\WebCore\SandBox.Web\Scripts" CopyAll="true">
+      <!-- Copy all files, except specified -->
+      <Path></Path>
+    </FilesGroup>
+
+    <FilesGroup Type="WebContent" Path="X:\My work\Projects\WebCore\SandBox.Web\Content" CopyAll="true">
+      <!-- Copy all files, except ignored -->
+      <Path></Path>
+    </FilesGroup>
+
+    <FilesGroup Type="WebBin" Path="X:\My work\Projects\WebCore\SandBox.Web\bin">
+      <Path Common="true">Aramis system.dll</Path>
+      <Path Common="true">ReportView.dll</Path>
+      <Path Common="true">RepositoryOfMatrixReportData.dll</Path>
+      <Path Common="true">AramisInfrastructure.dll</Path>
+      <Path Common="true">DBInteraction.dll</Path>
+      <Path Common="true">TableViewInterfaces.dll</Path>
+      <Path>WebCore.dll</Path>
+      <Path>WebCore.BusinessLogic.dll</Path>
+      <Path>WebAramis.Repositories.dll</Path>
+      <Path>WebCore.Models.dll</Path>
+      <Path>WebCore.Security.dll</Path>
+
+      <Path Common="true">SandboxCore.dll</Path>
+    </FilesGroup>
+
+    <FilesGroup Type="WebViews" Path="X:\My work\Projects\WebCore\SandBox.Web\Views" CopyAll="true"/>
+    <!-- Copy all files, except ignored -->
+
+    <FilesGroup Type="DesktopBin" Path="X:\My work\Projects\UTK\Aramis.NET\SandboxDesktop\bin\Release">
+      <Path>Sandbox.exe</Path>
+      <Path>AramisDesktopUserInterface.dll</Path>
+      <Path>AramisEmailHelper.dll</Path>
+      <Path>AramisWpfComponents.dll</Path>
+      <Path>MatrixAdapterEditor.dll</Path>
+      <Path>NPOI.dll</Path>
+      <Path>ThoughtWorks.QRCode.dll</Path>
+    </FilesGroup>
+  </Solution>
+
+  <Solution Name="Greenhouse" Url="Utk-aramis.org\Update">
+    <FilesGroup Type="WebScripts" Path="" CopyAll="true">
+      <!-- Copy all files, except specified -->
+      <Path></Path>
+    </FilesGroup>
+
+    <FilesGroup Type="WebContent" Path="" CopyAll="true">
+      <!-- Copy all files, except ignored -->
+      <Path></Path>
+    </FilesGroup>
+
+    <FilesGroup Type="WebBin" Path="">
+      <Path Common="true">Aramis system.dll</Path>
+      <Path>GreenhouseWeb.dll</Path>
+    </FilesGroup>
+
+    <FilesGroup Type="WebViews" Path="" CopyAll="true"/>
+    <!-- Copy all files, except ignored -->
+
+    <FilesGroup Type="DesktopBin" Path="">
+      <Path></Path>
+    </FilesGroup>
+  </Solution>
+</Root>

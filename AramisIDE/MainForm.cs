@@ -12,11 +12,16 @@ namespace AramisIDE
     {
     public partial class MainForm : Form
         {
+        public static Form Instance { get; private set; }
+
         public MainForm()
             {
             InitializeComponent();
-            new TrayMenu(this);
+            solutions = new SolutionsReader().ReadSolutions();
+            new TrayMenu(this, solutions);
             new HotKeysManager(this);
+
+            Instance = this;
             }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -25,6 +30,7 @@ namespace AramisIDE
             }
 
         private bool showing;
+        private List<SolutionDetails> solutions;
 
         internal void ShowForm()
             {

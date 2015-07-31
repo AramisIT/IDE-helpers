@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AramisIDE.Actions;
+using AramisIDE.SolutionUpdating;
 
 namespace AramisIDE.Interface
     {
@@ -33,10 +34,12 @@ namespace AramisIDE.Interface
 
         private MainForm mainForm;
         private NotifyIcon trayIcon;
+        private List<SolutionDetails> solutions;
 
-        public TrayMenu(MainForm mainForm)
+        public TrayMenu(MainForm mainForm, List<SolutionDetails> solutions)
             {
             this.mainForm = mainForm;
+            this.solutions = solutions;
             createTrayIcon();
             }
 
@@ -67,6 +70,19 @@ namespace AramisIDE.Interface
                             }
                     };
                 }
+
+            var firstSolution = true;
+            foreach (var solutionDetails in solutions)
+                {
+                var newItem = menu.MenuItems.Add(string.Format(@"Update ""{0}""", solutionDetails.Name));
+                newItem.Click += (sender, e) => new SolutionUpdater(solutionDetails).Update();
+                if (firstSolution)
+                    {
+                    newItem.BarBreak = true;
+                    firstSolution = false;
+                    }
+                }
+
             return menu;
             }
 

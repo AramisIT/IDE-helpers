@@ -55,6 +55,14 @@
     <Compile Include="Actions\DocumentGuid.cs" />
     <Compile Include="Actions\RestoreScriptCreator.cs" />
     <Compile Include="HotKeysManager.cs" />
+    <Compile Include="Models\FileDetails.cs" />
+    <Compile Include="Models\FilesGroup.cs" />
+    <Compile Include="Models\SolutionDetails.cs" />
+    <Compile Include="SolutionsReader.cs" />
+    <Compile Include="SolutionUpdating\IgnoreCaseStringEqualityComparer.cs" />
+    <Compile Include="SolutionUpdating\SolutionUpdater.cs" />
+    <Compile Include="SolutionUpdating\UploadingTask.cs" />
+    <Compile Include="Utils\FileUploader\HttpFileUploader.cs" />
     <Compile Include="Utils\KeyboardHook.cs" />
     <Compile Include="Utils\GuidGenerator.cs" />
     <Compile Include="Interface\TrayMenu.cs" />
@@ -91,6 +99,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="Solutions.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Resources\RestoreSqlCommand.txt" />
     <None Include="Resources\CatalogTemplate.txt" />
     <None Include="Resources\DocumentTemplate.txt" />
