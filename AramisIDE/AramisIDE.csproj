@@ -58,6 +58,7 @@
     <Compile Include="Models\FileDetails.cs" />
     <Compile Include="Models\FilesGroup.cs" />
     <Compile Include="Models\SolutionDetails.cs" />
+    <Compile Include="PasswordsReader.cs" />
     <Compile Include="SolutionsReader.cs" />
     <Compile Include="SolutionUpdating\IgnoreCaseStringEqualityComparer.cs" />
     <Compile Include="SolutionUpdating\SolutionUpdater.cs" />
@@ -98,6 +99,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="Passwords.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Solutions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

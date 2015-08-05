@@ -1,5 +1,5 @@
 ﻿<Root>
-  <Solution Name="Sandbox" Url="http://localhost:50258">
+  <Solution Name="Sandbox" Url="http://localhost:50257">
     <FilesGroup Type="WebScripts" Path="X:\My work\Projects\WebCore\SandBox.Web\Scripts" CopyAll="true">
       <!-- Copy all files, except specified -->
       <Path></Path>

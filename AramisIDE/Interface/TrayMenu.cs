@@ -35,11 +35,13 @@ namespace AramisIDE.Interface
         private MainForm mainForm;
         private NotifyIcon trayIcon;
         private List<SolutionDetails> solutions;
+        private SortedDictionary<string, string> passwords;
 
-        public TrayMenu(MainForm mainForm, List<SolutionDetails> solutions)
+        public TrayMenu(MainForm mainForm, List<SolutionDetails> solutions, SortedDictionary<string, string> passwords)
             {
             this.mainForm = mainForm;
             this.solutions = solutions;
+            this.passwords = passwords;
             createTrayIcon();
             }
 
@@ -54,6 +56,63 @@ namespace AramisIDE.Interface
         private ContextMenu createNotifyMenu()
             {
             var menu = new ContextMenu();
+
+            addHelpersItems(menu);
+
+            addUpdateSolutionsItems(menu);
+
+            addCopyToClipboardItems(menu);
+
+            return menu;
+            }
+
+        private void addCopyToClipboardItems(ContextMenu menu)
+            {
+            var firstSolution = true;
+            foreach (var kvp in passwords)
+                {
+                var newItem = menu.MenuItems.Add(kvp.Key);
+                newItem.Tag = kvp.Value;
+
+                newItem.Click += (sender, e) => Clipboard.SetText((sender as MenuItem).Tag.ToString());
+
+                if (firstSolution)
+                    {
+                    newItem.BarBreak = true;
+                    firstSolution = false;
+                    }
+                }
+            }
+
+        private void addUpdateSolutionsItems(ContextMenu menu)
+            {
+            var firstSolution = true;
+            foreach (var solutionDetails in solutions)
+                {
+                var newItem = menu.MenuItems.Add(string.Format(@"Update ""{0}""", solutionDetails.Name));
+                newItem.Click += (sender, e) =>
+                    {
+                        var updater = new SolutionUpdater(solutionDetails);
+                        if (!updater.CanStartUpdating())
+                            {
+                            MessageBox.Show("Last update isn't complated!",
+                                string.Format(@"Update ""{0}""", solutionDetails.Name), MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                            return;
+                            }
+
+                        updater.Update();
+                    };
+                if (firstSolution)
+                    {
+                    newItem.BarBreak = true;
+                    firstSolution = false;
+                    }
+                }
+            }
+
+        private void addHelpersItems(ContextMenu menu)
+            {
             foreach (var item in menuDescriptions)
                 {
                 var newItem = menu.MenuItems.Add(item);
@@ -70,31 +129,6 @@ namespace AramisIDE.Interface
                             }
                     };
                 }
-
-            var firstSolution = true;
-            foreach (var solutionDetails in solutions)
-                {
-                var newItem = menu.MenuItems.Add(string.Format(@"Update ""{0}""", solutionDetails.Name));
-                newItem.Click += (sender, e) =>
-                    {
-                        var updater = new SolutionUpdater(solutionDetails);
-                        if (!updater.CanStartUpdating())
-                            {
-                            MessageBox.Show("Last update isn't complated!",
-                                string.Format(@"Update ""{0}""", solutionDetails.Name), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return;
-                            }
-
-                        updater.Update();
-                    };
-                if (firstSolution)
-                    {
-                    newItem.BarBreak = true;
-                    firstSolution = false;
-                    }
-                }
-
-            return menu;
             }
 
         private void onMenuItemClick(MenuItems menuItem)
