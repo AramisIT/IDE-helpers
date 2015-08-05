@@ -75,7 +75,18 @@ namespace AramisIDE.Interface
             foreach (var solutionDetails in solutions)
                 {
                 var newItem = menu.MenuItems.Add(string.Format(@"Update ""{0}""", solutionDetails.Name));
-                newItem.Click += (sender, e) => new SolutionUpdater(solutionDetails).Update();
+                newItem.Click += (sender, e) =>
+                    {
+                        var updater = new SolutionUpdater(solutionDetails);
+                        if (!updater.CanStartUpdating())
+                            {
+                            MessageBox.Show("Last update isn't complated!",
+                                string.Format(@"Update ""{0}""", solutionDetails.Name), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                            }
+
+                        updater.Update();
+                    };
                 if (firstSolution)
                     {
                     newItem.BarBreak = true;

@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AramisIDE.SolutionUpdating;
 
 namespace AramisIDE.Models
     {
-    public enum FilesGroupTypes
-        {
-        WebViews,
-        WebScripts,
-        WebContent,
-        WebBin,
-        DesktopBin
-        }
-
     public class FilesGroup
         {
         public bool CopyAll { get; set; }

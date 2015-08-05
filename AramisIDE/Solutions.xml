@@ -10,6 +10,10 @@
       <Path></Path>
     </FilesGroup>
 
+    <FilesGroup Type="WebRoot" Path="X:\My work\Projects\WebCore\SandBox.Web">
+      <Path>packages.config</Path>
+    </FilesGroup>
+
     <FilesGroup Type="WebBin" Path="X:\My work\Projects\WebCore\SandBox.Web\bin">
       <Path Common="true">Aramis system.dll</Path>
       <Path Common="true">ReportView.dll</Path>

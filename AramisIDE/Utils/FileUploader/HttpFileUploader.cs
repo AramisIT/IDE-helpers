@@ -17,7 +17,7 @@ namespace AramisIDE.Utils.FileUploader
             this.url = url;
             }
 
-        public void UploadFile(string fullFileName)
+        public string UploadFile(string fullFileName)
             {
             try
                 {
@@ -26,13 +26,14 @@ namespace AramisIDE.Utils.FileUploader
                 byte[] response = null;
                 //response = client.UploadData(url, new byte[] { 65, 65, 65 });
                 response = client.UploadFile(url, "PUT", fullFileName);
-                Trace.WriteLine(response);
 
+                var reply = System.Text.Encoding.UTF8.GetString(response);
                 client.Dispose();
+                return reply;
                 }
             catch (Exception err)
                 {
-                MessageBox.Show(err.Message);
+                return err.Message;
                 }
             }
         }

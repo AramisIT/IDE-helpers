@@ -61,7 +61,6 @@
     <Compile Include="SolutionsReader.cs" />
     <Compile Include="SolutionUpdating\IgnoreCaseStringEqualityComparer.cs" />
     <Compile Include="SolutionUpdating\SolutionUpdater.cs" />
-    <Compile Include="SolutionUpdating\UploadingTask.cs" />
     <Compile Include="Utils\FileUploader\HttpFileUploader.cs" />
     <Compile Include="Utils\KeyboardHook.cs" />
     <Compile Include="Utils\GuidGenerator.cs" />
@@ -108,7 +107,12 @@
     <None Include="Resources\DocumentTemplate.txt" />
     <None Include="Images\icon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\UpdateTask\UpdateTask.csproj">
+      <Project>{993bf4be-3def-4b12-a756-2e9deb4c0f38}</Project>
+      <Name>UpdateTask</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

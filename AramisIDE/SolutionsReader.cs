@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
 using AramisIDE.Models;
+using AramisIDE.SolutionUpdating;
 
 namespace AramisIDE
     {
