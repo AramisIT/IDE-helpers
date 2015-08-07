@@ -19,6 +19,9 @@ namespace UpdateTask
         [XmlAttribute]
         public Guid UpdateId { get; set; }
 
+        [XmlAttribute]
+        public bool ReadyToUpdateSqlStructure { get; set; }
+
         public void Add(UploadingFile file)
             {
             Files.Add(file);
@@ -26,7 +29,7 @@ namespace UpdateTask
 
         public UpdatingFilesList GetCopyWithRelativePath()
             {
-            var result = new UpdatingFilesList() { UpdateId = UpdateId, RestartAllDesktopClients = RestartAllDesktopClients};
+            var result = new UpdatingFilesList() { UpdateId = UpdateId, RestartAllDesktopClients = RestartAllDesktopClients };
 
             foreach (var file in Files)
                 {

@@ -15,16 +15,19 @@ namespace AramisIDE
         internal SortedDictionary<string, string> ReadPasswords()
             {
             var result = new SortedDictionary<string, string>();
-            var passwords = File.ReadAllLines(string.Format(@"{0}\Passwords.txt", APPLICATION_PATH));
+            var fileName = string.Format(@"{0}\Passwords.txt", APPLICATION_PATH);
+            if (!File.Exists(fileName)) return result;
+
+            var passwords = File.ReadAllLines(fileName);
             foreach (var passwordLine in passwords)
                 {
                 if (string.IsNullOrEmpty(passwordLine.Trim())) continue;
 
-                var parts = passwordLine.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                if (parts.Length != 2) continue;
+                var separatorPos = passwordLine.IndexOf(';');
+                if (separatorPos <= 0 || passwordLine.Length == (separatorPos + 1)) continue;
 
-                var description = parts[0].Trim();
-                var password = parts[1];
+                var description = passwordLine.Substring(0, separatorPos).Trim();
+                var password = passwordLine.Substring(separatorPos + 1);
 
                 if (!result.ContainsKey(description))
                     {

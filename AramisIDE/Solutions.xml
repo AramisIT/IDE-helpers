@@ -1,5 +1,5 @@
 ﻿<Root>
-  <Solution Name="Sandbox" Url="http://localhost:50257">
+  <Solution Name="Sandbox" Url="http://localhost"><!--:50257-->
     <FilesGroup Type="WebScripts" Path="X:\My work\Projects\WebCore\SandBox.Web\Scripts" CopyAll="true">
       <!-- Copy all files, except specified -->
       <Path></Path>
@@ -21,12 +21,23 @@
       <Path Common="true">AramisInfrastructure.dll</Path>
       <Path Common="true">DBInteraction.dll</Path>
       <Path Common="true">TableViewInterfaces.dll</Path>
+      <Path Common="true">AramisWpfComponents.dll</Path>
+      <Path Common="true">MatrixAdapterEditor.dll</Path>
+      <Path Common="true">MatrixReportToHTMLConvertor.dll</Path>
+
       <Path>WebCore.dll</Path>
       <Path>WebCore.BusinessLogic.dll</Path>
       <Path>WebAramis.Repositories.dll</Path>
       <Path>WebCore.Models.dll</Path>
       <Path>WebCore.Security.dll</Path>
 
+      <Path>Aramis.Web.CoreInteraction.dll</Path>
+      <Path>Aramis.Web.Data.Models.dll</Path>
+      <Path>Aramis.Web.Data.Repositories.dll</Path>
+      <Path>UpdateTask.dll</Path>
+
+
+      <Path>SandboxWeb.dll</Path>
       <Path Common="true">SandboxCore.dll</Path>
     </FilesGroup>
 

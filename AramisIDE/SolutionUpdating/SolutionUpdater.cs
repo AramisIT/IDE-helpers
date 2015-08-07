@@ -231,17 +231,19 @@ namespace AramisIDE.SolutionUpdating
 
         private bool authorize()
             {
+            Thread.Sleep(10 * 1000);
+
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             const int AUTHORISATION_TIME_LIMIT_SEC = 60 * 2;
             while (stopwatch.Elapsed.TotalSeconds < AUTHORISATION_TIME_LIMIT_SEC)
                 {
-                Thread.Sleep(1000);
-
                 if (userAuthorized())
                     {
                     return true;
                     }
+
+                Thread.Sleep(1000);
                 }
 
             return false;
