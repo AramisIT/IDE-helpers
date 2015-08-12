@@ -27,17 +27,6 @@ namespace UpdateTask
             Files.Add(file);
             }
 
-        public UpdatingFilesList GetCopyWithRelativePath()
-            {
-            var result = new UpdatingFilesList() { UpdateId = UpdateId, RestartAllDesktopClients = RestartAllDesktopClients };
-
-            foreach (var file in Files)
-                {
-                result.Files.Add(file.GetCopyWithRelativePath());
-                }
-            return result;
-            }
-
         [XmlAttribute]
         public bool RestartAllDesktopClients { get; set; }
         }

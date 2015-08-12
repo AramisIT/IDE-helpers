@@ -23,6 +23,9 @@ namespace AramisIDE.SolutionUpdating
         [XmlAttribute("Size")]
         public long FileSize { get; set; }
 
+        [XmlIgnore]
+        public string FullPath { get; set; }
+
         [XmlText]
         public string FilePath { get; set; }
 
@@ -90,40 +93,32 @@ namespace AramisIDE.SolutionUpdating
             return Path.GetFileName(FilePath);
             }
 
-        public UploadingFile GetCopyWithRelativePath()
+        public void SetFilePath(string filePath)
             {
-            return new UploadingFile()
-                {
-                    FilePath = getRelativePath(FilePath),
-                    FileSize = FileSize,
-                    Id = Id,
-                    IsWebSystem = IsWebSystem,
-                    IsDesktop = IsDesktop,
-                    ModifiedTime = ModifiedTime,
-                    Group = Group
-                };
-            }
+            FilePath = (filePath ?? string.Empty).Trim();
 
-        private string getRelativePath(string filePath)
-            {
+            if (!string.IsNullOrEmpty(FilePath)) return;
+
             switch (Group)
                 {
                 case FilesGroupTypes.WebBin:
                 case FilesGroupTypes.DesktopBin:
                 case FilesGroupTypes.WebRoot:
-                    return Path.GetFileName(filePath);
+                    FilePath = Path.GetFileName(FullPath);
+                    break;
 
                 case FilesGroupTypes.WebScripts:
-                    return getRelativePath(filePath, "Scripts");
+                    FilePath = getRelativePath(FullPath, "Scripts");
+                    break;
 
                 case FilesGroupTypes.WebViews:
-                    return getRelativePath(filePath, "Views");
+                    FilePath = getRelativePath(FullPath, "Views");
+                    break;
 
                 case FilesGroupTypes.WebContent:
-                    return getRelativePath(filePath, "Content");
+                    FilePath = getRelativePath(FullPath, "Content");
+                    break;
                 }
-
-            return null;
             }
 
         private string getRelativePath(string filePath, string folderName)

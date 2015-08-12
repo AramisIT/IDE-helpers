@@ -1,14 +1,13 @@
 ﻿<Root>
-  <Solution Name="Sandbox" Url="http://localhost"><!--:50257-->
+  <Solution Name="Sandbox" Url="http://localhost:50257">
+    <!--:50257-->
     <FilesGroup Type="WebScripts" Path="X:\My work\Projects\WebCore\SandBox.Web\Scripts" CopyAll="true">
-      <!-- Copy all files, except specified -->
-      <Path></Path>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
     </FilesGroup>
 
-    <FilesGroup Type="WebContent" Path="X:\My work\Projects\WebCore\SandBox.Web\Content" CopyAll="true">
-      <!-- Copy all files, except ignored -->
-      <Path></Path>
-    </FilesGroup>
+    <FilesGroup Type="WebContent" Path="X:\My work\Projects\WebCore\SandBox.Web\Content" CopyAll="true"/>
+
+    <FilesGroup Type="WebViews" Path="X:\My work\Projects\WebCore\SandBox.Web\Views" CopyAll="true"/>
 
     <FilesGroup Type="WebRoot" Path="X:\My work\Projects\WebCore\SandBox.Web">
       <Path>packages.config</Path>
@@ -41,9 +40,6 @@
       <Path Common="true">SandboxCore.dll</Path>
     </FilesGroup>
 
-    <FilesGroup Type="WebViews" Path="X:\My work\Projects\WebCore\SandBox.Web\Views" CopyAll="true"/>
-    <!-- Copy all files, except ignored -->
-
     <FilesGroup Type="DesktopBin" Path="X:\My work\Projects\UTK\Aramis.NET\SandboxDesktop\bin\Release">
       <Path>Sandbox.exe</Path>
       <Path>AramisDesktopUserInterface.dll</Path>
@@ -55,27 +51,59 @@
     </FilesGroup>
   </Solution>
 
-  <Solution Name="Greenhouse" Url="Utk-aramis.org\Update">
-    <FilesGroup Type="WebScripts" Path="" CopyAll="true">
-      <!-- Copy all files, except specified -->
-      <Path></Path>
+  <Solution Name="Greenhouse" Url="http://10.9.1.3">
+    <FilesGroup Type="WebScripts" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Scripts" CopyAll="true">
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
     </FilesGroup>
 
-    <FilesGroup Type="WebContent" Path="" CopyAll="true">
-      <!-- Copy all files, except ignored -->
-      <Path></Path>
+    <FilesGroup Type="WebContent" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Content" CopyAll="true"/>
+
+    <FilesGroup Type="WebViews" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Views" CopyAll="true"/>
+
+    <FilesGroup Type="WebRoot" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web">
+      <Path>packages.config</Path>
     </FilesGroup>
 
-    <FilesGroup Type="WebBin" Path="">
+    <FilesGroup Type="WebBin" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\bin">
       <Path Common="true">Aramis system.dll</Path>
+      <Path Common="true">ReportView.dll</Path>
+      <Path Common="true">RepositoryOfMatrixReportData.dll</Path>
+      <Path Common="true">AramisInfrastructure.dll</Path>
+      <Path Common="true">DBInteraction.dll</Path>
+      <Path Common="true">TableViewInterfaces.dll</Path>
+      <Path Common="true">AramisWpfComponents.dll</Path>
+      <Path Common="true">MatrixAdapterEditor.dll</Path>
+      <Path Common="true">MatrixReportToHTMLConvertor.dll</Path>
+
+      <Path>WebCore.dll</Path>
+      <Path>WebCore.BusinessLogic.dll</Path>
+      <Path>WebAramis.Repositories.dll</Path>
+      <Path>WebCore.Models.dll</Path>
+      <Path>WebCore.Security.dll</Path>
+
+      <Path>Aramis.Web.CoreInteraction.dll</Path>
+      <Path>Aramis.Web.Data.Models.dll</Path>
+      <Path>Aramis.Web.Data.Repositories.dll</Path>
+      <Path>UpdateTask.dll</Path>
+
+
       <Path>GreenhouseWeb.dll</Path>
+      <Path Common="true">GreenhouseCore.dll</Path>
     </FilesGroup>
 
-    <FilesGroup Type="WebViews" Path="" CopyAll="true"/>
-    <!-- Copy all files, except ignored -->
-
-    <FilesGroup Type="DesktopBin" Path="">
-      <Path></Path>
+    <FilesGroup Type="DesktopBin" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
+      <Path>Greenhouse.exe</Path>
+      <Path>AramisDesktopUserInterface.dll</Path>
+      <Path>AramisEmailHelper.dll</Path>
+      <Path>AramisWpfComponents.dll</Path>
+      <Path>AramisWPFLibriary.dll</Path>
+      <Path>PlaningWindow.dll</Path>
+      <Path>LinePointer.dll</Path>
+      <Path>PackageViaWireless.dll</Path>
+      <Path>PackageConvertation.dll</Path>
+      <Path>MapCellDrawing.dll</Path>
+      <Path>MapCellsDataInterfaces.dll</Path>
+      <Path>MatrixAdapterEditor.dll</Path>
     </FilesGroup>
   </Solution>
 </Root>

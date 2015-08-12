@@ -125,10 +125,13 @@ namespace AramisIDE.SolutionUpdating
             var totalFiles = tasks.Files.Count;
             var uploaded = 0;
 
+            var fileUploader = new HttpFileUploader(solutionDetails.UserName, solutionDetails.Password);
+
+            UploadingFile lastTask = tasks.Files.Count > 0 ? tasks.Files.Last() : null;
             foreach (var task in tasks.Files)
                 {
-                var url = string.Format("{0}/sa/UploadFile?id={1}", solutionDetails.UpdateUrl, task.Id);
-                var result = new HttpFileUploader(url).UploadFile(task.FilePath);
+                fileUploader.Url = string.Format("{0}/sa/UploadFile?id={1}", solutionDetails.UpdateUrl, task.Id);
+                var result = fileUploader.UploadFile(task.FullPath);
 
                 if (!SUCCESSFUL_RESULT.Equals(result))
                     {
@@ -139,6 +142,11 @@ namespace AramisIDE.SolutionUpdating
                     uploaded++;
                     Trace.WriteLine(string.Format(@"Uploaded ""{0}"". Left to upload: {1}", task.FilePath, (totalFiles - uploaded)));
                     }
+
+                if (task == lastTask)
+                    {
+                    Trace.WriteLine("All tasks were uploaded!");
+                    }
                 }
 
             return true;
@@ -146,7 +154,7 @@ namespace AramisIDE.SolutionUpdating
 
         private bool uploadTasksList(UpdatingFilesList tasks)
             {
-            var tasksXml = XmlConvertor.ToXmlString(tasks.GetCopyWithRelativePath());
+            var tasksXml = XmlConvertor.ToXmlString(tasks);
 
             var url = string.Format("{0}/sa/TaskReceiver", solutionDetails.UpdateUrl);
 
@@ -161,14 +169,24 @@ namespace AramisIDE.SolutionUpdating
 
             foreach (var filesGroup in solutionDetails.FilesGroups)
                 {
-                var filesList = buildFilesList(filesGroup.Files, filesGroup.Path);
+                var filesList = new Dictionary<string, FileDetails>();
+                filesGroup.Files.ForEach(fileDetails => filesList.Add(fileDetails.FullPath, fileDetails));
 
                 if (filesGroup.CopyAll)
                     {
-                    var filesWithExceptions = new Dictionary<string, bool>();
+                    var filesWithExceptions = new Dictionary<string, FileDetails>();
+
                     findAllFiles(filesWithExceptions, filesGroup.Path, filesList);
 
                     filesList = filesWithExceptions;
+
+                    filesGroup.Files.ForEach(fileDetails =>
+                        {
+                            if (fileDetails.IsRef)
+                                {
+                                filesList.Add(fileDetails.FullPath, fileDetails);
+                                }
+                        });
                     }
 
                 addFiles(result, filesList, filesGroup.Type.ToString());
@@ -177,26 +195,32 @@ namespace AramisIDE.SolutionUpdating
             return result;
             }
 
-        private void addFiles(UpdatingFilesList resultFiles, Dictionary<string, bool> filesList, string groupName)
+        private void addFiles(UpdatingFilesList resultFiles, Dictionary<string, FileDetails> filesList, string groupName)
             {
             foreach (var kvp in filesList)
                 {
-                var isCommon = kvp.Value;
+                var fileDetails = kvp.Value;
+                var isCommon = fileDetails.IsCommon;
                 var isDesktop = isCommon || groupName.Equals("DesktopBin");
                 var fileInfo = new FileInfo(kvp.Key);
-                resultFiles.Add(new UploadingFile()
+
+                var uploadingFile = new UploadingFile()
                     {
-                        FilePath = kvp.Key,
+                        FullPath = kvp.Key,
                         IsDesktop = isDesktop,
                         IsWebSystem = isCommon || !isDesktop,
                         FileSize = fileInfo.Length,
                         Group = (FilesGroupTypes)Enum.Parse(typeof(FilesGroupTypes), groupName),
-                        ModifiedTime = fileInfo.LastWriteTime
-                    }.CreateId());
+                        ModifiedTime = fileInfo.LastWriteTime,
+                        FilePath = fileDetails.SubPath
+                    }.CreateId();
+                uploadingFile.SetFilePath(fileDetails.SubPath);
+
+                resultFiles.Add(uploadingFile);
                 }
             }
 
-        private void findAllFiles(Dictionary<string, bool> result, string path, Dictionary<string, bool> exceptions)
+        private void findAllFiles(Dictionary<string, FileDetails> result, string path, Dictionary<string, FileDetails> exceptions)
             {
             var currentDirInfo = new DirectoryInfo(path);
 
@@ -204,29 +228,16 @@ namespace AramisIDE.SolutionUpdating
                 {
                 if (exceptions.ContainsKey(fileInfo.FullName)) continue;
 
-                result.Add(fileInfo.FullName, false);
+                result.Add(fileInfo.FullName, new FileDetails()
+                    {
+                        FullPath = fileInfo.FullName
+                    });
                 }
 
             foreach (var dirInfo in currentDirInfo.GetDirectories())
                 {
                 findAllFiles(result, dirInfo.FullName, exceptions);
                 }
-            }
-
-        private Dictionary<string, bool> buildFilesList(List<FileDetails> fileslist, string path)
-            {
-            var files = new Dictionary<string, bool>(new IgnoreCaseStringEqualityComparer());
-
-            foreach (var fileDetails in fileslist)
-                {
-                var fullName = string.Format(@"{0}\{1}", path, fileDetails.SubPath);
-                if (File.Exists(fullName))
-                    {
-                    files.Add(fullName, fileDetails.IsCommon);
-                    }
-                }
-
-            return files;
             }
 
         private bool authorize()

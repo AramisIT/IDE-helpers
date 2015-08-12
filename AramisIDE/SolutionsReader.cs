@@ -29,39 +29,63 @@ namespace AramisIDE
 
                 document.Root.Elements("Solution").ToList().ForEach(solution =>
                     {
-                        var solutionDetails = new SolutionDetails()
+                        try
                             {
-                                Name = solution.Attribute("Name").Value,
-                                UpdateUrl = solution.Attribute("Url").Value.TrimEnd(new[] { '/' })
-                            };
-
-                        result.Add(solutionDetails);
-
-                        solution.Elements("FilesGroup").ToList().ForEach(fileGroupXml =>
-                            {
-                                var filesGroup = new FilesGroup()
-                                    {
-                                        CopyAll = bool.Parse((fileGroupXml.Attribute("CopyAll") ?? FALSE_ATTRIBUTE).Value),
-                                        Path = (fileGroupXml.Attribute("Path") ?? EMPTY_ATTRIBUTE).Value.Trim(new[] { '\\' }),
-                                        Type = (FilesGroupTypes)Enum.Parse(typeof(FilesGroupTypes), (fileGroupXml.Attribute("Type") ?? EMPTY_ATTRIBUTE).Value)
-                                    };
-
-                                solutionDetails.FilesGroups.Add(filesGroup);
-
-                                fileGroupXml.Elements("Path").ToList().ForEach(pathXml =>
+                            var solutionDetails = new SolutionDetails()
                                 {
-                                    var filePath = new FileDetails()
-                                    {
-                                        IsCommon = bool.Parse((pathXml.Attribute("Common") ?? FALSE_ATTRIBUTE).Value),
-                                        SubPath = pathXml.Value.Trim()
-                                    };
+                                    Name = solution.Attribute("Name").Value,
+                                    UpdateUrl = solution.Attribute("Url").Value.TrimEnd(new[] { '/' })
+                                };
 
-                                    if (!string.IsNullOrEmpty(filePath.SubPath))
+                            if (solution.Attribute("Login") != null)
+                                {
+                                solutionDetails.UserName = solution.Attribute("Login").Value;
+                                if (solution.Attribute("Password") != null)
+                                    {
+                                    solutionDetails.Password = solution.Attribute("Password").Value;
+                                    }
+                                }
+
+                            solution.Elements("FilesGroup").ToList().ForEach(fileGroupXml =>
+                                {
+                                    var filesGroup = new FilesGroup()
                                         {
-                                        filesGroup.Files.Add(filePath);
-                                        }
+                                            CopyAll = bool.Parse((fileGroupXml.Attribute("CopyAll") ?? FALSE_ATTRIBUTE).Value),
+                                            Path = (fileGroupXml.Attribute("Path") ?? EMPTY_ATTRIBUTE).Value.Trim(new[] { '\\' }),
+                                            Type =
+                                            (FilesGroupTypes)
+                                                Enum.Parse(typeof(FilesGroupTypes),
+                                                    (fileGroupXml.Attribute("Type") ?? EMPTY_ATTRIBUTE).Value)
+                                        };
+
+                                    solutionDetails.FilesGroups.Add(filesGroup);
+
+                                    fileGroupXml.Elements().ToList().ForEach(pathXml =>
+                                        {
+                                            var nodeTypeName = pathXml.Name.LocalName;
+                                            var filePath = new FileDetails()
+                                            {
+                                                SubPath = pathXml.Value.Trim(),
+                                                IsRef = nodeTypeName.Equals("Reference", StringComparison.InvariantCultureIgnoreCase),
+                                                IsCommon = bool.Parse((pathXml.Attribute("Common") ?? FALSE_ATTRIBUTE).Value),
+                                                FullPath = (pathXml.Attribute("Path") ?? EMPTY_ATTRIBUTE).Value
+                                            };
+
+                                            if (!filePath.IsRef)
+                                                {
+                                                filePath.FullPath = string.Format(@"{0}\{1}", filesGroup.Path, filePath.SubPath);
+                                                }
+
+                                            if (File.Exists(filePath.FullPath))
+                                                {
+                                                filesGroup.Files.Add(filePath);
+                                                }
+                                        });
                                 });
-                            });
+
+                            result.Add(solutionDetails);
+                            }
+                        catch { }
                     });
                 }
             catch
