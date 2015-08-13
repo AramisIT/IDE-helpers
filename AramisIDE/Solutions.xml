@@ -3,9 +3,17 @@
     <!--:50257-->
     <FilesGroup Type="WebScripts" Path="X:\My work\Projects\WebCore\SandBox.Web\Scripts" CopyAll="true">
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jquery-ui.custom.js">jquery-ui.custom.js</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\table-edit.js">table-edit.js</Reference>
+
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\items.views\SystemUpdates.js">items.views\SystemUpdates.js</Reference>
     </FilesGroup>
 
-    <FilesGroup Type="WebContent" Path="X:\My work\Projects\WebCore\SandBox.Web\Content" CopyAll="true"/>
+    <FilesGroup Type="WebContent" Path="X:\My work\Projects\WebCore\SandBox.Web\Content" CopyAll="true">
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\aramis.css">aramis.css</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\jquery-ui.custom.css">jquery-ui.custom.css</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\ZeroClipboard.swf">ZeroClipboard.swf</Reference>
+    </FilesGroup>
 
     <FilesGroup Type="WebViews" Path="X:\My work\Projects\WebCore\SandBox.Web\Views" CopyAll="true"/>
 
@@ -54,9 +62,17 @@
   <Solution Name="Greenhouse" Url="http://10.9.1.3">
     <FilesGroup Type="WebScripts" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Scripts" CopyAll="true">
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jquery-ui.custom.js">jquery-ui.custom.js</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\table-edit.js">table-edit.js</Reference>
+
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\items.views\SystemUpdates.js">items.views\SystemUpdates.js</Reference>
     </FilesGroup>
 
-    <FilesGroup Type="WebContent" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Content" CopyAll="true"/>
+    <FilesGroup Type="WebContent" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Content" CopyAll="true">
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\aramis.css">aramis.css</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\jquery-ui.custom.css">jquery-ui.custom.css</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\ZeroClipboard.swf">ZeroClipboard.swf</Reference>
+    </FilesGroup>
 
     <FilesGroup Type="WebViews" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Views" CopyAll="true"/>
 
