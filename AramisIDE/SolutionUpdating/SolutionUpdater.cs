@@ -60,7 +60,9 @@ namespace AramisIDE.SolutionUpdating
 
         public bool Update()
             {
-            //if ((Control.ModifierKeys & Keys.Control) != 0)
+            var askUserForCloseAllDesktopSessions = (Control.ModifierKeys & Keys.Control) != 0;
+
+            if (askUserForCloseAllDesktopSessions)
                 {
                 var dialogResult = MessageBox.Show(string.Format("Завершить все начатые сеансы принудительно?", solutionDetails.Name),
                     string.Format(@"Обновление ""{0}""", solutionDetails.Name), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -76,9 +78,25 @@ namespace AramisIDE.SolutionUpdating
                     }
                 }
 
-                if (!startWebApplication()) return false;
+            if (!checkInternetAccess())
+                {
+                MessageBox.Show("Нет интернет доступа!");
+                return false;
+                }
 
-                return startUpdating();
+            if (!startWebApplication()) return false;
+
+            return startUpdating();
+            }
+
+        private bool checkInternetAccess()
+            {
+            var authorizeUrl = string.Format("{0}/sa/ApplicationIsOk", solutionDetails.UpdateUrl);
+
+            var result = new WebClientHelper(authorizeUrl)
+                 .PerformPostRequest();
+
+            return result.Equals(SUCCESSFUL_RESULT);
             }
 
         private bool startWebApplication()

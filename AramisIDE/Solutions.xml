@@ -3,6 +3,7 @@
     <!--:50257-->
     <FilesGroup Type="WebScripts" Path="X:\My work\Projects\WebCore\SandBox.Web\Scripts" CopyAll="true">
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.admin.js">aramis.admin.js</Reference>
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jquery-ui.custom.js">jquery-ui.custom.js</Reference>
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\table-edit.js">table-edit.js</Reference>
 
@@ -59,9 +60,11 @@
     </FilesGroup>
   </Solution>
 
-  <Solution Name="Greenhouse" Url="http://10.9.1.3">
+  <Solution Name="Greenhouse" Url="http://91.202.144.77">
+    <!--10.9.1.3-->
     <FilesGroup Type="WebScripts" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Scripts" CopyAll="true">
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.admin.js">aramis.admin.js</Reference>
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jquery-ui.custom.js">jquery-ui.custom.js</Reference>
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\table-edit.js">table-edit.js</Reference>
 
@@ -123,9 +126,10 @@
     </FilesGroup>
   </Solution>
 
- <Solution Name="Trade house" Url="ppk-aramis.in.ua:90">
+  <Solution Name="Trade house" Url="ppk-aramis.in.ua:90">
     <FilesGroup Type="WebScripts" Path="X:\My work\Projects\WebCore\TradeHouse.Web\Scripts" CopyAll="true">
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
+      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.admin.js">aramis.admin.js</Reference>
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jquery-ui.custom.js">jquery-ui.custom.js</Reference>
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\table-edit.js">table-edit.js</Reference>
       <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\ZeroClipboard.js">ZeroClipboard.js</Reference>
