@@ -25,5 +25,10 @@ namespace AramisIDE.Models
             {
             return Type.ToString();
             }
+
+        public string BuildFullFilePath(string subPath)
+            {
+            return string.Format(@"{0}\{1}", Path, subPath);
+            }
         }
     }

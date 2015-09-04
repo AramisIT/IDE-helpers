@@ -62,6 +62,7 @@
     <Compile Include="SolutionsReader.cs" />
     <Compile Include="SolutionUpdating\IgnoreCaseStringEqualityComparer.cs" />
     <Compile Include="SolutionUpdating\SolutionUpdater.cs" />
+    <Compile Include="Utils\FileHashGenerator.cs" />
     <Compile Include="Utils\FileUploader\HttpFileUploader.cs" />
     <Compile Include="Utils\KeyboardHook.cs" />
     <Compile Include="Utils\GuidGenerator.cs" />

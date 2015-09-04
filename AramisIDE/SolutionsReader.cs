@@ -73,7 +73,7 @@ namespace AramisIDE
 
                                             if (!filePath.IsRef)
                                                 {
-                                                filePath.FullPath = string.Format(@"{0}\{1}", filesGroup.Path, filePath.SubPath);
+                                                filePath.FullPath = filesGroup.BuildFullFilePath(filePath.SubPath);
                                                 }
 
                                             if (File.Exists(filePath.FullPath))
@@ -83,6 +83,7 @@ namespace AramisIDE
                                         });
                                 });
 
+                            solutionDetails.CheckFilesDetails();
                             result.Add(solutionDetails);
                             }
                         catch { }

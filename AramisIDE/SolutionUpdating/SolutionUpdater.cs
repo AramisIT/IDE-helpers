@@ -78,6 +78,9 @@ namespace AramisIDE.SolutionUpdating
                     }
                 }
 
+            tasks = getUploadingTasks();
+            if (tasks == null || tasks.Files.Count == 0) return false;
+
             if (!checkInternetAccess())
                 {
                 MessageBox.Show("Нет интернет доступа!");
@@ -128,9 +131,6 @@ namespace AramisIDE.SolutionUpdating
         private void performUpdating()
             {
             if (!authorize()) return;
-
-            UpdatingFilesList tasks = getUploadingTasks();
-            if (tasks == null || tasks.Files.Count == 0) return;
 
             tasks.RestartAllDesktopClients = restartAllDesktopClients;
             if (!uploadTasksList(tasks)) return;
@@ -188,7 +188,25 @@ namespace AramisIDE.SolutionUpdating
             foreach (var filesGroup in solutionDetails.FilesGroups)
                 {
                 var filesList = new Dictionary<string, FileDetails>();
-                filesGroup.Files.ForEach(fileDetails => filesList.Add(fileDetails.FullPath, fileDetails));
+                foreach (var fileDetails in filesGroup.Files)
+                    {
+                    filesList.Add(fileDetails.FullPath, fileDetails);
+                    if (fileDetails.IsRef || filesGroup.Type != FilesGroupTypes.WebBin
+                        || !fileDetails.IsCommon || solutionDetails.DesktopBin == null) continue;
+
+                    var desktopFilePath = solutionDetails.DesktopBin.BuildFullFilePath(fileDetails.SubPath);
+                    if (!string.Equals(getFileHash(fileDetails.FullPath), getFileHash(desktopFilePath)))
+                        {
+                        var webIsNewer = new FileInfo(fileDetails.FullPath).LastWriteTime >
+                                          new FileInfo(desktopFilePath).LastWriteTime;
+                        var additionalMessage = (webIsNewer ? "Web" : "Desktop") + " file is newer!";
+
+                        MessageBox.Show(string.Format(@"File ""{0}"" is defferent for desktop and web!
+
+{1}", fileDetails.SubPath, additionalMessage));
+                        return null;
+                        }
+                    }
 
                 if (filesGroup.CopyAll)
                     {
@@ -211,6 +229,20 @@ namespace AramisIDE.SolutionUpdating
                 }
 
             return result;
+            }
+
+        private string getFileHash(string filePath)
+            {
+            try
+                {
+                return FileHashGenerator.GetFileHash(filePath, FileHashGenerator.HashType.SHA512);
+                }
+            catch (Exception exp)
+                {
+                var error = ("Updating.GetFileModificationDate() : Ошибка при попытке получения хешкода файла\r\n" + exp.Message);
+                MessageBox.Show(error);
+                throw exp;
+                }
             }
 
         private void addFiles(UpdatingFilesList resultFiles, Dictionary<string, FileDetails> filesList, string groupName)
@@ -280,6 +312,7 @@ namespace AramisIDE.SolutionUpdating
 
         const string SUCCESSFUL_RESULT = "OK";
         private bool restartAllDesktopClients;
+        private UpdatingFilesList tasks;
 
         private bool userAuthorized()
             {
