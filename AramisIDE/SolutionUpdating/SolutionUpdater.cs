@@ -128,12 +128,18 @@ namespace AramisIDE.SolutionUpdating
             return true;
             }
 
+        private UpdateLogger log = UpdateLogger.Instance;
+
         private void performUpdating()
             {
             if (!authorize()) return;
 
             tasks.RestartAllDesktopClients = restartAllDesktopClients;
+
+            log.Reset();
             if (!uploadTasksList(tasks)) return;
+            log.Append("Tasks have been uploaded: ");
+            tasks.Files.ForEach(file => log.Append(file.FilePath, "File"));
 
             uploadFilesToWebServer(tasks);
             }
@@ -153,6 +159,8 @@ namespace AramisIDE.SolutionUpdating
 
                 if (!SUCCESSFUL_RESULT.Equals(result))
                     {
+                    UpdateLogger.Instance.Append(result, "Can't upload the file");
+                    log.Append(task.FilePath, "Aborted!");
                     return false;
                     }
                 else
@@ -160,6 +168,8 @@ namespace AramisIDE.SolutionUpdating
                     uploaded++;
                     Trace.WriteLine(string.Format(@"Uploaded ""{0}"". Left to upload: {1}", task.FilePath, (totalFiles - uploaded)));
                     }
+
+                log.Append(task.FilePath, "File uploaded");
 
                 if (task == lastTask)
                     {

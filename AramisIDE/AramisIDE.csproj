@@ -35,6 +35,9 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DBInteraction">
+      <HintPath>..\..\..\UTK\Aramis.NET\DBInteraction\bin\Release\DBInteraction.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,6 +57,7 @@
     <Compile Include="Actions\NewDocument.cs" />
     <Compile Include="Actions\DocumentGuid.cs" />
     <Compile Include="Actions\RestoreScriptCreator.cs" />
+    <Compile Include="DialogShower.cs" />
     <Compile Include="HotKeysManager.cs" />
     <Compile Include="Models\FileDetails.cs" />
     <Compile Include="Models\FilesGroup.cs" />
@@ -62,6 +66,8 @@
     <Compile Include="SolutionsReader.cs" />
     <Compile Include="SolutionUpdating\IgnoreCaseStringEqualityComparer.cs" />
     <Compile Include="SolutionUpdating\SolutionUpdater.cs" />
+    <Compile Include="SourceCodeHelper\PredefinedStoredObjectsUpdater.cs" />
+    <Compile Include="UpdateLogger.cs" />
     <Compile Include="Utils\FileHashGenerator.cs" />
     <Compile Include="Utils\FileUploader\HttpFileUploader.cs" />
     <Compile Include="Utils\KeyboardHook.cs" />

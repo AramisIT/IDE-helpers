@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AramisIDE.Actions;
 using AramisIDE.SolutionUpdating;
+using AramisIDE.SourceCodeHelper;
 
 namespace AramisIDE.Interface
     {
@@ -74,13 +76,27 @@ namespace AramisIDE.Interface
                 var newItem = menu.MenuItems.Add(kvp.Key);
                 newItem.Tag = kvp.Value;
 
-                newItem.Click += (sender, e) => Clipboard.SetText((sender as MenuItem).Tag.ToString());
+                newItem.Click += (sender, e) => copyToClipBoard((sender as MenuItem).Tag.ToString());
 
                 if (firstSolution)
                     {
                     newItem.BarBreak = true;
                     firstSolution = false;
                     }
+                }
+            }
+
+        private void copyToClipBoard(string text)
+            {
+            if (string.IsNullOrEmpty(text)) return;
+
+            try
+                {
+                Clipboard.SetText(text);
+                }
+            catch (Exception exp)
+                {
+                Trace.WriteLine(exp.Message);
                 }
             }
 
@@ -109,6 +125,33 @@ namespace AramisIDE.Interface
                     firstSolution = false;
                     }
                 }
+
+            if (solutions.Count > 0)
+                {
+                menu.MenuItems.Add("-");
+                menu.MenuItems.Add("Log  >>  clipboard", (sender, e) =>
+                    {
+                        var message = UpdateLogger.Instance.ToString();
+                        if (string.IsNullOrEmpty(message))
+                            {
+                            MessageBox.Show("Log hasn't data!");
+                            return;
+                            }
+                        try
+                            {
+                            Clipboard.SetText(message);
+                            }
+                        catch
+                            {
+                            MessageBox.Show("Can't copy to clipboard!\r\n\r\n" + message);
+                            }
+                    });
+                }
+
+            menu.MenuItems.Add("Sql stored objects  >> source code Win-Shift-S", (sender, e) =>
+                {
+                    new PredefinedStoredObjectsUpdater().Update();
+                });
             }
 
         private void addHelpersItems(ContextMenu menu)

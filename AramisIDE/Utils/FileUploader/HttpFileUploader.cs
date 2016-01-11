@@ -36,6 +36,7 @@ namespace AramisIDE.Utils.FileUploader
                 }
             catch (Exception err)
                 {
+                UpdateLogger.Instance.Append("An exception has been throwed!");
                 return err.Message;
                 }
             }

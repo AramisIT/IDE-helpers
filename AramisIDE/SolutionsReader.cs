@@ -7,6 +7,7 @@ using System.Text;
 using System.Xml.Linq;
 using AramisIDE.Models;
 using AramisIDE.SolutionUpdating;
+using AramisIDE.SourceCodeHelper;
 
 namespace AramisIDE
     {
@@ -26,6 +27,10 @@ namespace AramisIDE
                 {
                 var xmlString = File.ReadAllText(string.Format(@"{0}\Solutions.xml", APPLICATION_PATH));
                 document = XDocument.Parse(xmlString);
+
+                new PredefinedStoredObjectsUpdater((document.Root.Attribute("predefined-stored-objects-path") ?? EMPTY_ATTRIBUTE).Value,
+                    (document.Root.Attribute("connection-string") ?? EMPTY_ATTRIBUTE).Value);
+
 
                 document.Root.Elements("Solution").ToList().ForEach(solution =>
                     {

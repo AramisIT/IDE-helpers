@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AramisIDE.Actions;
+using AramisIDE.SourceCodeHelper;
 using AramisIDE.Utils;
 
 namespace AramisIDE
@@ -25,6 +26,9 @@ namespace AramisIDE
             {
             keyboardHook.RegisterHotKey(ModifierKeys.Win | ModifierKeys.Alt, Keys.C);
             keyboardHook.RegisterHotKey(ModifierKeys.Win | ModifierKeys.Alt, Keys.L);
+            keyboardHook.RegisterHotKey(ModifierKeys.Win | ModifierKeys.Alt, Keys.L);
+            keyboardHook.RegisterHotKey(ModifierKeys.Win | ModifierKeys.Shift, Keys.S);
+
             keyboardHook.KeyPressed += keyboardHook_KeyPressed;
             }
 
@@ -38,6 +42,12 @@ namespace AramisIDE
 
                 case Keys.L:
                     new NewDocument();
+                    break;
+
+                case Keys.S:
+                    if ((e.Modifier & ModifierKeys.Shift) == 0) return;
+
+                    new PredefinedStoredObjectsUpdater().Update();
                     break;
                 }
             }
