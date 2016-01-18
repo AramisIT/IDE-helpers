@@ -20,9 +20,8 @@ namespace AramisIDE
             solutions = new SolutionsReader().ReadSolutions();
             passwords = new PasswordsReader().ReadPasswords();
             new TrayMenu(this, solutions, passwords);
-            new HotKeysManager(this);
-
             Instance = this;
+            updateHotKeys();
             }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -61,6 +60,27 @@ namespace AramisIDE
         private void button1_Click(object sender, EventArgs e)
             {
             hide();
+            }
+
+        private void hotKeysUpdater_Tick(object sender, EventArgs e)
+            {
+            if (InvokeRequired)
+                {
+                Invoke(new Action(updateHotKeys));
+                }
+            else
+                {
+                updateHotKeys();
+                }
+            }
+
+        private void updateHotKeys()
+            {
+            try
+                {
+                new HotKeysManager(this);
+                }
+            catch { }
             }
         }
     }

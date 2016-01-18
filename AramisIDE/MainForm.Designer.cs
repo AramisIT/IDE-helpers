@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
             {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button1 = new System.Windows.Forms.Button();
+            this.hotKeysUpdater = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // button1
@@ -41,6 +43,12 @@
             this.button1.Text = "Свернуть";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // hotKeysUpdater
+            // 
+            this.hotKeysUpdater.Enabled = true;
+            this.hotKeysUpdater.Interval = 5000;
+            this.hotKeysUpdater.Tick += new System.EventHandler(this.hotKeysUpdater_Tick);
             // 
             // MainForm
             // 
@@ -64,6 +72,7 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer hotKeysUpdater;
         }
     }
 

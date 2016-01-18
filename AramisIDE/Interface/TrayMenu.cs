@@ -152,6 +152,7 @@ namespace AramisIDE.Interface
                 {
                     new PredefinedStoredObjectsUpdater().Update();
                 });
+           // menu.MenuItems.Add("Update hot keys", (sender, e) => new HotKeysManager(MainForm.Instance as MainForm));
             }
 
         private void addHelpersItems(ContextMenu menu)
