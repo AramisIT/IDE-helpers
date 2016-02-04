@@ -11,13 +11,10 @@ namespace AramisIDE
     {
     class HotKeysManager
         {
-        private MainForm mainForm;
         private KeyboardHook keyboardHook;
 
-        public HotKeysManager(MainForm mainForm)
+        public HotKeysManager()
             {
-            this.mainForm = mainForm;
-
             keyboardHook = new KeyboardHook();
             createHotKeys();
             }

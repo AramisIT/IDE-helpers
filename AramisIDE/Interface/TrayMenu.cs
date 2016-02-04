@@ -19,7 +19,6 @@ namespace AramisIDE.Interface
             MakeCatalogGuid,
             MakeDocumentGuid,
             StartDateAndFinishDate,
-            ShowProperties,
             CreateRestoreScript,
             Quit
             }
@@ -30,20 +29,19 @@ namespace AramisIDE.Interface
         "Make catalog guid", 
         "Make document guid", 
         "StartDate and FinishDate",
-        "Show properties",
         "Create restore script",
         "Quit" };
 
-        private MainForm mainForm;
         private NotifyIcon trayIcon;
         private List<SolutionDetails> solutions;
         private SortedDictionary<string, string> passwords;
+        private Action quitApplication;
 
-        public TrayMenu(MainForm mainForm, List<SolutionDetails> solutions, SortedDictionary<string, string> passwords)
+        public TrayMenu(List<SolutionDetails> solutions, SortedDictionary<string, string> passwords, Action quitApplication)
             {
-            this.mainForm = mainForm;
             this.solutions = solutions;
             this.passwords = passwords;
+            this.quitApplication = quitApplication;
             createTrayIcon();
             }
 
@@ -152,7 +150,7 @@ namespace AramisIDE.Interface
                 {
                     new PredefinedStoredObjectsUpdater().Update();
                 });
-           // menu.MenuItems.Add("Update hot keys", (sender, e) => new HotKeysManager(MainForm.Instance as MainForm));
+            // menu.MenuItems.Add("Update hot keys", (sender, e) => new HotKeysManager(MainForm.Instance as MainForm));
             }
 
         private void addHelpersItems(ContextMenu menu)
@@ -180,11 +178,7 @@ namespace AramisIDE.Interface
             switch (menuItem)
                 {
                 case MenuItems.Quit:
-                    CloseProgram();
-                    return;
-
-                case MenuItems.ShowProperties:
-                    mainForm.ShowForm();
+                    closeProgram();
                     return;
 
                 case MenuItems.CreateRestoreScript:
@@ -213,10 +207,13 @@ namespace AramisIDE.Interface
                 }
             }
 
-        private void CloseProgram()
+        private void closeProgram()
             {
-            trayIcon.Visible = false;
-            mainForm.Close();
+            if (quitApplication != null)
+                {
+                trayIcon.Visible = false;
+                quitApplication();
+                }
             }
         }
     }
