@@ -62,6 +62,7 @@
     <Compile Include="HotKeysManager.cs" />
     <Compile Include="Models\FileDetails.cs" />
     <Compile Include="Models\FilesGroup.cs" />
+    <Compile Include="Models\HardLinkedFiles.cs" />
     <Compile Include="Models\SolutionDetails.cs" />
     <Compile Include="PasswordsReader.cs" />
     <Compile Include="SolutionsReader.cs" />

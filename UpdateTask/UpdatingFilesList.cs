@@ -22,12 +22,7 @@ namespace UpdateTask
         [XmlAttribute]
         public bool ReadyToUpdateSqlStructure { get; set; }
 
-        public void Add(UploadingFile file)
-            {
-            Files.Add(file);
-            }
-
         [XmlAttribute]
-        public bool RestartAllDesktopClients { get; set; }
+        public int UpdateDocumentId { get; set; }
         }
     }

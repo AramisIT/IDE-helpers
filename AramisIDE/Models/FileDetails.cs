@@ -14,8 +14,6 @@ namespace AramisIDE.Models
 
         public bool IsCommon { get; set; }
 
-        public bool IsRef { get; set; }
-
         public override string ToString()
             {
             return SubPath;

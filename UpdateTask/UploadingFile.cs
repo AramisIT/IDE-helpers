@@ -17,6 +17,18 @@ namespace AramisIDE.SolutionUpdating
         DesktopBin
         }
 
+    public class DefaultSubdirectories
+        {
+        public static readonly Dictionary<FilesGroupTypes, string> DirectoriesNames = new Dictionary<FilesGroupTypes, string>()
+            {
+            {FilesGroupTypes.WebScripts, "Scripts"},
+            {FilesGroupTypes.WebContent, "Content"},
+            {FilesGroupTypes.WebViews, "Views"},
+            {FilesGroupTypes.WebBin, "bin"},
+            {FilesGroupTypes.WebRoot, ""}
+            };
+        }
+
     [XmlType("UploadingFile")]
     public class UploadingFile
         {
@@ -26,14 +38,14 @@ namespace AramisIDE.SolutionUpdating
         [XmlIgnore]
         public string FullPath { get; set; }
 
+        [XmlIgnore]
+        public string Hash { get; set; }
+
         [XmlText]
         public string FilePath { get; set; }
 
         [XmlAttribute]
         public Guid Id { get; set; }
-
-        [XmlAttribute]
-        public bool IsWebSystem { get; set; }
 
         [XmlAttribute]
         public bool IsDesktop { get; set; }

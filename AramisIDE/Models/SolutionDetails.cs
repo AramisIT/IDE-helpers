@@ -14,6 +14,8 @@ namespace AramisIDE
 
         public string UpdateUrl { get; set; }
 
+        public string WebRootDirectory { get; set; }
+
         public List<FilesGroup> FilesGroups { get; private set; }
 
         public SolutionDetails()
@@ -23,7 +25,7 @@ namespace AramisIDE
 
         public override string ToString()
             {
-            return Name;
+            return string.Format("{0}     {1}", Name, WebRootDirectory);
             }
 
         public string UserName { get; set; }

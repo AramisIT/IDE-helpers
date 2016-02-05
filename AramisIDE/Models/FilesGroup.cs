@@ -19,6 +19,7 @@ namespace AramisIDE.Models
         public FilesGroup()
             {
             Files = new List<FileDetails>();
+            IgnoreFilesExtensions = new HashSet<string>(new IgnoreCaseStringEqualityComparer());
             }
 
         public override string ToString()
@@ -30,5 +31,9 @@ namespace AramisIDE.Models
             {
             return string.Format(@"{0}\{1}", Path, subPath);
             }
+
+        public HashSet<string> IgnoreFilesExtensions { get; private set; }
+
+        public HardLinkedFiles HardLinkedFiles { get; set; }
         }
     }

@@ -1,278 +1,96 @@
 ﻿<Root connection-string="Server=localhost;Database=master;User Id=sa; Password=123;" predefined-stored-objects-path="X:\My work\Projects\UTK\Aramis.NET\DBInteraction\Resources\DatabaseStoredObjects.xml">
-  <Solution Name="Sandbox" Url="http://localhost:50257">
-    <!--:50257-->
-    <FilesGroup Type="WebScripts" Path="X:\My work\Projects\WebCore\SandBox.Web\Scripts" CopyAll="true">
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.admin.js">aramis.admin.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jquery-ui.custom.js">jquery-ui.custom.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\table-edit.js">table-edit.js</Reference>
+  <References Type="WebContent" Directory="X:\My work\Projects\WebCore\WebCore\Content">
+    <Path>aramis.css</Path>
+    <Path>jquery-ui.custom.css</Path>
+  </References>
 
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\items.views\SystemUpdates.js">items.views\SystemUpdates.js</Reference>
-    </FilesGroup>
+  <References Type="WebScripts" Directory="X:\My work\Projects\WebCore\WebCore\Scripts\">
+    <Path>aramis.js</Path>
+    <Path>aramis.admin.js</Path>
+    <Path>aramis.consts.js</Path>
+    <Path>aramis.reporting.js</Path>
 
-    <FilesGroup Type="WebContent" Path="X:\My work\Projects\WebCore\SandBox.Web\Content" CopyAll="true">
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\aramis.css">aramis.css</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\jquery-ui.custom.css">jquery-ui.custom.css</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\ZeroClipboard.swf">ZeroClipboard.swf</Reference>
-    </FilesGroup>
+    <Path>jquery-ui.custom.js</Path>
+    <Path>table-edit.js</Path>
+    <Path>jpicker.js</Path>
+    
+    <Path>items.views\SystemUpdates.js</Path>
+    <Path>Controls\jquery.mainTable.js</Path>
+  </References>
 
-    <FilesGroup Type="WebViews" Path="X:\My work\Projects\WebCore\SandBox.Web\Views" CopyAll="true"/>
-
-    <FilesGroup Type="WebRoot" Path="X:\My work\Projects\WebCore\SandBox.Web">
-      <Path>packages.config</Path>
-    </FilesGroup>
-
-    <FilesGroup Type="WebBin" Path="X:\My work\Projects\WebCore\SandBox.Web\bin">
-      <Path Common="true">Aramis system.dll</Path>
-      <Path Common="true">ReportView.dll</Path>
-      <Path Common="true">RepositoryOfMatrixReportData.dll</Path>
-      <Path Common="true">AramisInfrastructure.dll</Path>
-      <Path Common="true">DBInteraction.dll</Path>
-      <Path Common="true">TableViewInterfaces.dll</Path>
-      <Path Common="true">AramisWpfComponents.dll</Path>
-      <Path Common="true">MatrixAdapterEditor.dll</Path>
-      <Path>MatrixReportToHTMLConvertor.dll</Path>
-
-      <Path>WebCore.dll</Path>
-      <Path>WebCore.BusinessLogic.dll</Path>
-      <Path>WebAramis.Repositories.dll</Path>
-      <Path>WebCore.Models.dll</Path>
-      <Path>WebCore.Security.dll</Path>
-
-      <Path>Aramis.Web.CoreInteraction.dll</Path>
-      <Path>Aramis.Web.Data.Models.dll</Path>
-      <Path>Aramis.Web.Data.Repositories.dll</Path>
-      <Path>UpdateTask.dll</Path>
-
-
-      <Path>SandboxWeb.dll</Path>
-      <Path Common="true">SandboxCore.dll</Path>
-    </FilesGroup>
-
-    <FilesGroup Type="DesktopBin" Path="X:\My work\Projects\UTK\Aramis.NET\SandboxDesktop\bin\Release">
+  <Solution Name="Sandbox" Url="http://localhost:50257" Directory="X:\My work\Projects\WebCore\SandBox.Web"
+            DesktopDirectory="X:\My work\Projects\UTK\Aramis.NET\SandboxDesktop\bin\Release">
+    <Path>MatrixAdapterEditor.dll</Path>
+    <Path>NPOI.dll</Path>
+    <Path>ThoughtWorks.QRCode.dll</Path>
+    <Path>Aramis system.dll</Path>
+    <Path>ReportView.dll</Path>
+    <Path>RepositoryOfMatrixReportData.dll</Path>
+    <Path>AramisInfrastructure.dll</Path>
+    <Path>DBInteraction.dll</Path>
+    <Path>TableViewInterfaces.dll</Path>
+    <Path>AramisWpfComponents.dll</Path>
+    <Path>SandboxCore.dll</Path>
+    <DesktopOnlyFiles>
       <Path>Sandbox.exe</Path>
       <Path>AramisDesktopUserInterface.dll</Path>
       <Path>AramisEmailHelper.dll</Path>
-      <Path>AramisWpfComponents.dll</Path>
-      <Path>MatrixAdapterEditor.dll</Path>
-      <Path>NPOI.dll</Path>
-      <Path>ThoughtWorks.QRCode.dll</Path>
-    </FilesGroup>
+    </DesktopOnlyFiles>
   </Solution>
 
-  <Solution Name="Greenhouse" Url="http://91.202.144.77">
-    <!--10.9.1.3-->
-    <FilesGroup Type="WebScripts" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Scripts" CopyAll="true">
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.admin.js">aramis.admin.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.consts.js">aramis.consts.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.reporting.js">aramis.reporting.js</Reference>
+  <Solution Name="Greenhouse" Url="http://91.202.144.77" Directory="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
+            DesktopDirectory="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
+    
+    <Path>GreenhouseCore.dll</Path>
 
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jquery-ui.custom.js">jquery-ui.custom.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\table-edit.js">table-edit.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jpicker.js">jpicker.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\ZeroClipboard.js">ZeroClipboard.js</Reference>
-
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\items.views\SystemUpdates.js">items.views\SystemUpdates.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\Controls\jquery.mainTable.js">Controls\jquery.mainTable.js</Reference>
-    </FilesGroup>
-
-    <FilesGroup Type="WebContent" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Content" CopyAll="true">
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\aramis.css">aramis.css</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\jquery-ui.custom.css">jquery-ui.custom.css</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\ZeroClipboard.swf">ZeroClipboard.swf</Reference>
-    </FilesGroup>
-
-    <FilesGroup Type="WebViews" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Views" CopyAll="true"/>
-
-    <FilesGroup Type="WebRoot" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web">
-      <Path>packages.config</Path>
-    </FilesGroup>
-
-    <FilesGroup Type="WebBin" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\bin">
-      <Path Common="true">Aramis system.dll</Path>
-      <Path Common="true">ReportView.dll</Path>
-      <Path Common="true">MatrixReportViewBuilder.dll</Path>
-      <Path Common="true">RepositoryOfMatrixReportData.dll</Path>
-      <Path Common="true">AramisInfrastructure.dll</Path>
-      <Path Common="true">DBInteraction.dll</Path>
-      <Path Common="true">TableViewInterfaces.dll</Path>
-      <!--<Path Common="true">AramisWpfComponents.dll</Path>
-      <Path Common="true">MatrixAdapterEditor.dll</Path>-->
-      <Path>MatrixReportToHTMLConvertor.dll</Path>
-
-      <Path>WebCore.dll</Path>
-      <Path>WebCore.BusinessLogic.dll</Path>
-      <Path>WebAramis.Repositories.dll</Path>
-      <Path>WebCore.Models.dll</Path>
-      <Path>WebCore.Security.dll</Path>
-
-      <Path>Aramis.Web.CoreInteraction.dll</Path>
-      <Path>Aramis.Web.Data.Models.dll</Path>
-      <Path>Aramis.Web.Data.Repositories.dll</Path>
-      <Path>UpdateTask.dll</Path>
-
-
-      <Path>GreenhouseWeb.dll</Path>
-      <Path Common="true">GreenhouseCore.dll</Path>
-    </FilesGroup>
-
-    <FilesGroup Type="DesktopBin" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
+    <Path>Aramis system.dll</Path>
+    <Path>ReportView.dll</Path>
+    <Path>MatrixReportViewBuilder.dll</Path>
+    <Path>RepositoryOfMatrixReportData.dll</Path>
+    <Path>AramisInfrastructure.dll</Path>
+    <Path>DBInteraction.dll</Path>
+    <Path>TableViewInterfaces.dll</Path>
+    
+    <Path>AramisWpfComponents.dll</Path>
+    <Path>MatrixAdapterEditor.dll</Path>
+    
+    <DesktopOnlyFiles>
       <Path>Greenhouse.exe</Path>
       <Path>MatrixAdapterEditor.dll</Path>
       <Path>AramisDesktopUserInterface.dll</Path>
 
-      <!--<Path>AramisVisualizationLibriary.dll</Path>
-      <Path>AramisWpfComponents.dll</Path>
-      <Path>AramisWPFLibriary.dll</Path>-->
-
-      <!--<Path>PlaningWindow.dll</Path>
+      <Path>PlaningWindow.dll</Path>
       <Path>AramisEmailHelper.dll</Path>
       <Path>LinePointer.dll</Path>
       <Path>PackageViaWireless.dll</Path>
       <Path>PackageConvertation.dll</Path>
       <Path>MapCellDrawing.dll</Path>
-      <Path>MapCellsDataInterfaces.dll</Path>-->
-    </FilesGroup>
+      <Path>MapCellsDataInterfaces.dll</Path>
+
+      <Path>AramisVisualizationLibriary.dll</Path>
+      <Path>AramisWPFLibriary.dll</Path>
+    </DesktopOnlyFiles>
   </Solution>
 
-  <Solution Name="Greenhouse - local" Url="http://10.9.1.3">
-    <!--10.9.1.3-->
-    <FilesGroup Type="WebScripts" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Scripts" CopyAll="true">
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.admin.js">aramis.admin.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.consts.js">aramis.consts.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.reporting.js">aramis.reporting.js</Reference>
-
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jquery-ui.custom.js">jquery-ui.custom.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\table-edit.js">table-edit.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jpicker.js">jpicker.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\ZeroClipboard.js">ZeroClipboard.js</Reference>
-
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\items.views\SystemUpdates.js">items.views\SystemUpdates.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\Controls\jquery.mainTable.js">Controls\jquery.mainTable.js</Reference>
-    </FilesGroup>
-
-    <FilesGroup Type="WebContent" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Content" CopyAll="true">
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\aramis.css">aramis.css</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\jquery-ui.custom.css">jquery-ui.custom.css</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\ZeroClipboard.swf">ZeroClipboard.swf</Reference>
-    </FilesGroup>
-
-    <FilesGroup Type="WebViews" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\Views" CopyAll="true"/>
-
-    <FilesGroup Type="WebRoot" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web">
-      <Path>packages.config</Path>
-    </FilesGroup>
-
-    <FilesGroup Type="WebBin" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web\bin">
-      <Path Common="true">Aramis system.dll</Path>
-      <Path Common="true">ReportView.dll</Path>
-      <Path Common="true">MatrixReportViewBuilder.dll</Path>
-      <Path Common="true">RepositoryOfMatrixReportData.dll</Path>
-      <Path Common="true">AramisInfrastructure.dll</Path>
-      <Path Common="true">DBInteraction.dll</Path>
-      <Path Common="true">TableViewInterfaces.dll</Path>
-      <!--<Path Common="true">AramisWpfComponents.dll</Path>
-      <Path Common="true">MatrixAdapterEditor.dll</Path>-->
-      <Path>MatrixReportToHTMLConvertor.dll</Path>
-
-      <Path>WebCore.dll</Path>
-      <Path>WebCore.BusinessLogic.dll</Path>
-      <Path>WebAramis.Repositories.dll</Path>
-      <Path>WebCore.Models.dll</Path>
-      <Path>WebCore.Security.dll</Path>
-
-      <Path>Aramis.Web.CoreInteraction.dll</Path>
-      <Path>Aramis.Web.Data.Models.dll</Path>
-      <Path>Aramis.Web.Data.Repositories.dll</Path>
-      <Path>UpdateTask.dll</Path>
-
-
-      <Path>GreenhouseWeb.dll</Path>
-      <Path Common="true">GreenhouseCore.dll</Path>
-    </FilesGroup>
-
-    <FilesGroup Type="DesktopBin" Path="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
-      <Path>Greenhouse.exe</Path>
-      <Path>MatrixAdapterEditor.dll</Path>
-      <Path>AramisDesktopUserInterface.dll</Path>
-
-      <!--<Path>AramisVisualizationLibriary.dll</Path>
+  <Solution Name="Trade house" Url="http://ppk-aramis.in.ua:90" Directory="X:\My work\Projects\WebCore\TradeHouse.Web"
+            DesktopDirectory="X:\My work\Projects\UTK\Aramis.NET\TradeHouseDesktop\bin\Release">
+   
+      <Path>Aramis system.dll</Path>
+      <Path>ReportView.dll</Path>
+      <Path>MatrixReportViewBuilder.dll</Path>
+      <Path>RepositoryOfMatrixReportData.dll</Path>
+      <Path>AramisInfrastructure.dll</Path>
+      <Path>DBInteraction.dll</Path>
+      <Path>TableViewInterfaces.dll</Path>
       <Path>AramisWpfComponents.dll</Path>
-      <Path>AramisWPFLibriary.dll</Path>-->
-
-      <!--<Path>PlaningWindow.dll</Path>
-      <Path>AramisEmailHelper.dll</Path>
-      <Path>LinePointer.dll</Path>
-      <Path>PackageViaWireless.dll</Path>
-      <Path>PackageConvertation.dll</Path>
-      <Path>MapCellDrawing.dll</Path>
-      <Path>MapCellsDataInterfaces.dll</Path>-->
-    </FilesGroup>
-  </Solution>
-
-  <!--<Solution Name="Trade house" Url="http://localhost:50259">-->
-  <Solution Name="Trade house" Url="http://ppk-aramis.in.ua:90">
-    <FilesGroup Type="WebScripts" Path="X:\My work\Projects\WebCore\TradeHouse.Web\Scripts" CopyAll="true">
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.js">aramis.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.admin.js">aramis.admin.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\aramis.consts.js">aramis.consts.js</Reference>
-
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\jquery-ui.custom.js">jquery-ui.custom.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\table-edit.js">table-edit.js</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\ZeroClipboard.js">ZeroClipboard.js</Reference>
-
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Scripts\items.views\SystemUpdates.js">items.views\SystemUpdates.js</Reference>
-    </FilesGroup>
-
-    <FilesGroup Type="WebContent" Path="X:\My work\Projects\WebCore\TradeHouse.Web\Content" CopyAll="true">
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\aramis.css">aramis.css</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\jquery-ui.custom.css">jquery-ui.custom.css</Reference>
-      <Reference Path="X:\My work\Projects\WebCore\WebCore\Content\ZeroClipboard.swf">ZeroClipboard.swf</Reference>
-    </FilesGroup>
-
-    <FilesGroup Type="WebViews" Path="X:\My work\Projects\WebCore\TradeHouse.Web\Views" CopyAll="true"/>
-
-    <FilesGroup Type="WebRoot" Path="X:\My work\Projects\WebCore\TradeHouse.Web">
-      <Path>packages.config</Path>
-    </FilesGroup>
-
-    <FilesGroup Type="WebBin" Path="X:\My work\Projects\WebCore\TradeHouse.Web\bin">
-      <Path Common="true">Aramis system.dll</Path>
-      <Path Common="true">ReportView.dll</Path>
-      <Path Common="true">MatrixReportViewBuilder.dll</Path>
-      <Path Common="true">RepositoryOfMatrixReportData.dll</Path>
-      <Path Common="true">AramisInfrastructure.dll</Path>
-      <Path Common="true">DBInteraction.dll</Path>
-      <Path Common="true">TableViewInterfaces.dll</Path>
-      <Path Common="true">AramisWpfComponents.dll</Path>
-      <Path Common="true">MatrixAdapterEditor.dll</Path>
-      <Path>MatrixReportToHTMLConvertor.dll</Path>
-
-      <Path>WebCore.dll</Path>
-      <Path>WebCore.BusinessLogic.dll</Path>
-      <Path>WebAramis.Repositories.dll</Path>
-      <Path>WebCore.Models.dll</Path>
-      <Path>WebCore.Security.dll</Path>
-
-      <Path>Aramis.Web.CoreInteraction.dll</Path>
-      <Path>Aramis.Web.Data.Models.dll</Path>
-      <Path>Aramis.Web.Data.Repositories.dll</Path>
-      <Path>UpdateTask.dll</Path>
-
-
-      <Path>TradehouseWeb.dll</Path>
-      <Path Common="true">TradeHouseCore.dll</Path>
-    </FilesGroup>
-
-    <FilesGroup Type="DesktopBin" Path="X:\My work\Projects\UTK\Aramis.NET\TradeHouseDesktop\bin\Release">
+      <Path>MatrixAdapterEditor.dll</Path>
+      <Path>TradeHouseCore.dll</Path>
+    
+    <DesktopOnlyFiles>
       <Path>TradeHouse.exe</Path>
       <Path>AramisDesktopUserInterface.dll</Path>
       <Path>AramisEmailHelper.dll</Path>
-      <Path>AramisWpfComponents.dll</Path>
       <Path>AramisWPFLibriary.dll</Path>
-      <Path>MatrixAdapterEditor.dll</Path>
-    </FilesGroup>
+    </DesktopOnlyFiles>
   </Solution>
 </Root>
