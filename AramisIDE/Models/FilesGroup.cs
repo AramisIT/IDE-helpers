@@ -16,10 +16,12 @@ namespace AramisIDE.Models
 
         public List<FileDetails> Files { get; private set; }
 
+        public List<string> DirectoriesToAdd { get; set; }
+
         public FilesGroup()
             {
             Files = new List<FileDetails>();
-            IgnoreFilesExtensions = new HashSet<string>(new IgnoreCaseStringEqualityComparer());
+            IgnoreFilesSuffixes = new Dictionary<string, bool>(new IgnoreCaseStringEqualityComparer());
             }
 
         public override string ToString()
@@ -32,7 +34,7 @@ namespace AramisIDE.Models
             return string.Format(@"{0}\{1}", Path, subPath);
             }
 
-        public HashSet<string> IgnoreFilesExtensions { get; private set; }
+        public Dictionary<string, bool> IgnoreFilesSuffixes { get; private set; }
 
         public HardLinkedFiles HardLinkedFiles { get; set; }
         }

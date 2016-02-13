@@ -8,7 +8,7 @@ using System.Text;
 
 namespace AramisIDE.Utils
     {
-    class FileHashGenerator
+    public class FileHashGenerator
         {
         public static string GetFileHash(string filePath, HashType type = HashType.SHA512)
             {

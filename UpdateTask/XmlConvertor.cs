@@ -11,9 +11,11 @@ namespace UpdateTask
     {
     public class XmlConvertor
         {
-        public static string ToXmlString(UpdatingFilesList tasks)
+        public static string ToXmlString<T>(T tasks) where T : class
             {
-            var serializer = new XmlSerializer(typeof(UpdatingFilesList));
+            if (tasks == null) return string.Empty;
+
+            var serializer = new XmlSerializer(typeof(T));
             using (var stream = new MemoryStream())
                 {
                 serializer.Serialize(stream, tasks);
@@ -27,15 +29,20 @@ namespace UpdateTask
                 }
             }
 
-        public static UpdatingFilesList ToListFromXmlString(string tasksXml)
+        public static T ToObjectFromXmlString<T>(string tasksXml) where T : class
             {
+            if (string.IsNullOrEmpty(tasksXml))
+                {
+                return null;
+                }
+
             try
                 {
-                var serializer = new XmlSerializer(typeof(UpdatingFilesList));
+                var serializer = new XmlSerializer(typeof(T));
 
                 using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(tasksXml ?? "")))
                     {
-                    var result = serializer.Deserialize(stream) as UpdatingFilesList;
+                    var result = (T)serializer.Deserialize(stream);
 
                     return result;
                     }

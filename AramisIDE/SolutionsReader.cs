@@ -19,6 +19,8 @@ namespace AramisIDE
 
         private static readonly XAttribute EMPTY_ATTRIBUTE = new XAttribute("Empty", string.Empty);
 
+        private readonly List<string> webRootFiles = new List<string> { "packages.config", "Global.asax" };
+
         public List<SolutionDetails> ReadSolutions()
             {
             var result = new List<SolutionDetails>();
@@ -122,8 +124,6 @@ namespace AramisIDE
             result.Add(solutionDetails);
             }
 
-        private readonly List<string> webRootFiles = new List<string> { "packages.config" };
-
         private void addWebFilesGroups(List<FilesGroup> filesGroups, string webDirectoryPath,
             Dictionary<FilesGroupTypes, HardLinkedFiles> hardLinkedFilesByGroupType)
             {
@@ -148,11 +148,16 @@ namespace AramisIDE
                 if (hardLinkedFilesByGroupType.TryGetValue(groupType, out hardLinkedFiles))
                     {
                     filesGroup.HardLinkedFiles = hardLinkedFiles;
+                    if (groupType == FilesGroupTypes.WebScripts)
+                        {
+                        filesGroup.IgnoreFilesSuffixes.Add(".intellisense.js", false);
+                        filesGroup.IgnoreFilesSuffixes.Add("jquery.validate-vsdoc.js", false);
+                        }
                     }
                 else if (groupType == FilesGroupTypes.WebBin)
                     {
-                    filesGroup.IgnoreFilesExtensions.Add(".xml");
-                    filesGroup.IgnoreFilesExtensions.Add(".pdb");
+                    filesGroup.IgnoreFilesSuffixes.Add(".xml", false);
+                    filesGroup.IgnoreFilesSuffixes.Add(".pdb", false);
                     }
                 }
 
@@ -160,13 +165,21 @@ namespace AramisIDE
                 {
                     Type = FilesGroupTypes.WebRoot,
                     CopyAll = false,
-                    Path = webDirectoryPath
+                    Path = webDirectoryPath,
+                    DirectoriesToAdd = new List<string>() { "fonts" }
                 };
-            webRootFiles.ForEach(subPath => rootDir.Files.Add(new FileDetails()
+            webRootFiles.ForEach(subPath =>
                 {
-                    SubPath = subPath,
-                    FullPath = rootDir.BuildFullFilePath(subPath)
-                }));
+                    var fullPath = rootDir.BuildFullFilePath(subPath);
+                    if (File.Exists(fullPath))
+                        {
+                        rootDir.Files.Add(new FileDetails()
+                            {
+                                SubPath = subPath,
+                                FullPath = fullPath
+                            });
+                        }
+                });
 
             filesGroups.Add(rootDir);
             }

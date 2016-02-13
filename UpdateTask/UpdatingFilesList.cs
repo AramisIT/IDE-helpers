@@ -21,8 +21,5 @@ namespace UpdateTask
 
         [XmlAttribute]
         public bool ReadyToUpdateSqlStructure { get; set; }
-
-        [XmlAttribute]
-        public int UpdateDocumentId { get; set; }
         }
     }

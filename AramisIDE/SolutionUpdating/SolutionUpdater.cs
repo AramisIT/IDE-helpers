@@ -126,21 +126,49 @@ namespace AramisIDE.SolutionUpdating
             var fileUploader = new HttpFileUploader(solutionDetails.UserName, solutionDetails.Password);
 
             UploadingFile lastTask = tasks.Files.Count > 0 ? tasks.Files.Last() : null;
+            var maxUploadingAttemptCount = 10;
+            var fatClientsFiles = tasks.Files[0].IsDesktop;
+
             foreach (var task in tasks.Files)
                 {
-                fileUploader.Url = string.Format("{0}/sa/UploadFile?id={1}", solutionDetails.UpdateUrl, task.Id);
-                var result = fileUploader.UploadFile(task.FullPath);
-
-                if (!SUCCESSFUL_RESULT.Equals(result))
+                var checkIfFatClientsOnly = fatClientsFiles && !task.IsDesktop;
+                if (checkIfFatClientsOnly)
                     {
-                    UpdateLogger.Instance.Append(result, "Can't upload the file");
+                    if (isFatClientsOnly())
+                        {
+                        Trace.WriteLine("All tasks were uploaded!");
+                        return true;
+                        }
+
+                    fatClientsFiles = false;
+                    }
+
+                fileUploader.Url = string.Format("{0}/sa/UploadFile?id={1}", solutionDetails.UpdateUrl, task.Id);
+
+                var attemptIndex = 0;
+                string uploadResult = null;
+                while (attemptIndex < maxUploadingAttemptCount)
+                    {
+                    uploadResult = fileUploader.UploadFile(task.FullPath);
+
+                    if (SUCCESSFUL_RESULT.Equals(uploadResult))
+                        {
+                        uploaded++;
+                        Trace.WriteLine(string.Format(@"Uploaded ""{0}"". Left to upload: {1}", task.FilePath, (totalFiles - uploaded)));
+                        break;
+                        }
+                    else
+                        {
+                        attemptIndex += 1;
+                        Thread.Sleep(attemptIndex * 100);
+                        }
+                    }
+
+                if (attemptIndex == maxUploadingAttemptCount)
+                    {
+                    UpdateLogger.Instance.Append(uploadResult, "Can't upload the file");
                     log.Append(task.FilePath, "Aborted!");
                     return false;
-                    }
-                else
-                    {
-                    uploaded++;
-                    Trace.WriteLine(string.Format(@"Uploaded ""{0}"". Left to upload: {1}", task.FilePath, (totalFiles - uploaded)));
                     }
 
                 log.Append(task.FilePath, "File uploaded");
@@ -154,6 +182,15 @@ namespace AramisIDE.SolutionUpdating
             return true;
             }
 
+        private bool isFatClientsOnly()
+            {
+            var url = string.Format("{0}/sa/IsFatClientsOnly", solutionDetails.UpdateUrl);
+
+            var result = new WebClientHelper(url).PerformPostRequest();
+
+            return Convert.ToBoolean(result);
+            }
+
         private bool uploadTasksList(UpdatingFilesList tasks)
             {
             var tasksXml = XmlConvertor.ToXmlString(tasks);
@@ -162,7 +199,46 @@ namespace AramisIDE.SolutionUpdating
 
             var result = new WebClientHelper(url).AddContent(tasksXml).PerformPostRequest();
 
-            return result.Equals(SUCCESSFUL_RESULT);
+            var resultUploadTasks = XmlConvertor.ToObjectFromXmlString<UploadTasks>(result);
+
+            if (resultUploadTasks != null && resultUploadTasks.Files != null && resultUploadTasks.Files.Count > 0)
+                {
+                var uploadTasksDictionary = new Func<UploadTasks, Dictionary<Guid, bool>>(uploadTasks =>
+                {
+                    var dictionary = new Dictionary<Guid, bool>();
+                    uploadTasks.Files.ForEach(uploadTask => dictionary.Add(uploadTask.Id, uploadTask.FatClientFile));
+                    return dictionary;
+                })(resultUploadTasks);
+
+                var source = tasks.Files.ToList();
+                tasks.Files.Clear();
+
+                // updating uploading files set
+                foreach (var uploadingFile in source)
+                    {
+                    bool fatClientFile;
+                    // if file wasn't changed we shouldn't upload it
+                    if (!uploadTasksDictionary.TryGetValue(uploadingFile.Id, out fatClientFile)) continue;
+
+                    uploadTasksDictionary.Remove(uploadingFile.Id);
+                    uploadingFile.IsDesktop = fatClientFile;
+
+                    if (fatClientFile)
+                        {
+                        // optimizing in case fat clients only - fat clients files must be uploaded first
+                        tasks.Files.Insert(0, uploadingFile);
+                        }
+                    else
+                        {
+                        tasks.Files.Add(uploadingFile);
+                        }
+                    }
+                return true;
+                }
+            else
+                {
+                return false;
+                }
             }
 
         private UpdatingFilesList getUploadingTasks()
@@ -184,6 +260,13 @@ namespace AramisIDE.SolutionUpdating
                     foreach (var fileDetails in filesGroup.Files)
                         {
                         filesList.Add(fileDetails.FullPath, fileDetails);
+                        }
+                    if (filesGroup.DirectoriesToAdd != null)
+                        {
+                        foreach (var directoryName in filesGroup.DirectoriesToAdd)
+                            {
+                            findAllFiles(filesList, solutionDetails.WebRootDirectory + "\\" + directoryName, filesGroup);
+                            }
                         }
                     }
 
@@ -311,8 +394,26 @@ namespace AramisIDE.SolutionUpdating
 
             foreach (var fileInfo in currentDirInfo.GetFiles())
                 {
-                if (filesGroup.IgnoreFilesExtensions != null
-                    && filesGroup.IgnoreFilesExtensions.Contains(Path.GetExtension(fileInfo.FullName))) continue;
+                var skipFile = false;
+                foreach (var kvp in filesGroup.IgnoreFilesSuffixes)
+                    {
+                    var fileSuffix = kvp.Key;
+                    var checkWholeFileName = kvp.Value;
+                    if (checkWholeFileName)
+                        {
+                        if (Path.GetFileName(fileInfo.FullName).Equals(fileSuffix))
+                            {
+                            skipFile = true;
+                            break;
+                            }
+                        }
+                    else if (fileInfo.FullName.EndsWith(fileSuffix, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                        skipFile = true;
+                        break;
+                        }
+                    }
+                if (skipFile) continue;
 
                 var subPath = fileInfo.FullName.Substring(filesGroup.Path.Length + 1);
                 string fullPath;

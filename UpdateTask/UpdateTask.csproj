@@ -42,6 +42,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdatingFilesList.cs" />
     <Compile Include="UploadingFile.cs" />
+    <Compile Include="UploadTasks.cs" />
+    <Compile Include="WebAppUpdaterTasks.cs" />
     <Compile Include="WebClientHelper.cs" />
     <Compile Include="XmlConvertor.cs" />
   </ItemGroup>

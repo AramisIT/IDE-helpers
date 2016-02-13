@@ -38,10 +38,10 @@ namespace AramisIDE.SolutionUpdating
         [XmlIgnore]
         public string FullPath { get; set; }
 
-        [XmlIgnore]
+        [XmlText]
         public string Hash { get; set; }
 
-        [XmlText]
+        [XmlAttribute]
         public string FilePath { get; set; }
 
         [XmlAttribute]

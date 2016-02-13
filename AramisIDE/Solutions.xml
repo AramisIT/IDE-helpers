@@ -18,8 +18,28 @@
     <Path>Controls\jquery.mainTable.js</Path>
   </References>
 
-  <Solution Name="Sandbox" Url="http://localhost:50257" Directory="X:\My work\Projects\WebCore\SandBox.Web"
+  <Solution Name="Sandbox tests" Url="http://localhost:50257" Directory="X:\My work\Projects\WebCore\SandBox.Web"
             DesktopDirectory="X:\My work\Projects\UTK\Aramis.NET\SandboxDesktop\bin\Release">
+    <Path>MatrixAdapterEditor.dll</Path>
+    <Path>NPOI.dll</Path>
+    <Path>ThoughtWorks.QRCode.dll</Path>
+    <Path>Aramis system.dll</Path>
+    <Path>ReportView.dll</Path>
+    <Path>RepositoryOfMatrixReportData.dll</Path>
+    <Path>AramisInfrastructure.dll</Path>
+    <Path>DBInteraction.dll</Path>
+    <Path>TableViewInterfaces.dll</Path>
+    <Path>AramisWpfComponents.dll</Path>
+    <Path>SandboxCore.dll</Path>
+    <DesktopOnlyFiles>
+      <Path>Sandbox.exe</Path>
+      <Path>AramisDesktopUserInterface.dll</Path>
+      <Path>AramisEmailHelper.dll</Path>
+    </DesktopOnlyFiles>
+  </Solution>
+
+  <Solution Name="Sandbox real" Url="http://localhost" Directory="X:\My work\Projects\WebCore\SandBox.Web"
+          DesktopDirectory="X:\My work\Projects\UTK\Aramis.NET\SandboxDesktop\bin\Release">
     <Path>MatrixAdapterEditor.dll</Path>
     <Path>NPOI.dll</Path>
     <Path>ThoughtWorks.QRCode.dll</Path>
