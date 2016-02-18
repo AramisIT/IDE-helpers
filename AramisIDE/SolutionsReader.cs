@@ -115,8 +115,8 @@ namespace AramisIDE
                         CopyAll = false,
                         Path = solution.Attribute("DesktopDirectory").Value
                     };
-                solutionDetails.FilesGroups.Add(desktopFilesGroup);
                 readDesktopFiles(solution.Elements(), desktopFilesGroup, true);
+                solutionDetails.FilesGroups.Add(desktopFilesGroup);
                 }
 
             addWebFilesGroups(solutionDetails.FilesGroups, solutionDetails.WebRootDirectory, hardLinkedFilesByGroupType);

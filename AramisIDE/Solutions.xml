@@ -72,7 +72,6 @@
     <Path>TableViewInterfaces.dll</Path>
     
     <Path>AramisWpfComponents.dll</Path>
-    <Path>MatrixAdapterEditor.dll</Path>
     
     <DesktopOnlyFiles>
       <Path>Greenhouse.exe</Path>
@@ -103,7 +102,6 @@
       <Path>DBInteraction.dll</Path>
       <Path>TableViewInterfaces.dll</Path>
       <Path>AramisWpfComponents.dll</Path>
-      <Path>MatrixAdapterEditor.dll</Path>
       <Path>TradeHouseCore.dll</Path>
     
     <DesktopOnlyFiles>
@@ -111,6 +109,7 @@
       <Path>AramisDesktopUserInterface.dll</Path>
       <Path>AramisEmailHelper.dll</Path>
       <Path>AramisWPFLibriary.dll</Path>
+      <Path>MatrixAdapterEditor.dll</Path>
     </DesktopOnlyFiles>
   </Solution>
 </Root>

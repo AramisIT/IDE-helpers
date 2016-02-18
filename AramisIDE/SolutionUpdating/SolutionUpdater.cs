@@ -115,7 +115,10 @@ namespace AramisIDE.SolutionUpdating
             log.Append("Tasks have been uploaded: ");
             tasks.Files.ForEach(file => log.Append(file.FilePath, "File"));
 
-            uploadFilesToWebServer(tasks);
+            if (uploadFilesToWebServer(tasks))
+                {
+                new WebClientHelper(string.Format("{0}/sa/UpdateSolution?id={1}", solutionDetails.UpdateUrl, tasks.UpdateId)).PerformPostRequest();
+                }
             }
 
         private bool uploadFilesToWebServer(UpdatingFilesList tasks)
@@ -198,6 +201,9 @@ namespace AramisIDE.SolutionUpdating
             var url = string.Format("{0}/sa/TaskReceiver", solutionDetails.UpdateUrl);
 
             var result = new WebClientHelper(url).AddContent(tasksXml).PerformPostRequest();
+
+            try { Clipboard.SetText(result); }
+            catch { }
 
             var resultUploadTasks = XmlConvertor.ToObjectFromXmlString<UploadTasks>(result);
 
@@ -443,7 +449,7 @@ namespace AramisIDE.SolutionUpdating
 
         private bool authorize()
             {
-            Thread.Sleep(10 * 1000);
+            Thread.Sleep(2 * 1000);
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
