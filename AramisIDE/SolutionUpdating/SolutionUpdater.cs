@@ -302,34 +302,39 @@ namespace AramisIDE.SolutionUpdating
                 {
                 foreach (var fileDetails in solutionDetails.DesktopBin.Files)
                     {
-                    if (!fileDetails.IsCommon) continue;
-
                     var fileSubPath = fileDetails.SubPath;
-
                     UploadingFile webApplicationFile;
                     if (!webBinFiles.TryGetValue(fileSubPath, out webApplicationFile))
                         {
+                        if (!fileDetails.IsCommon) continue;
                         MessageBox.Show(string.Format(@"File ""{0}"" not found in web solution!", fileSubPath));
                         return false;
                         }
 
                     var desktopFile = findDesktopFile(updatingFilesList, fileSubPath);
                     webApplicationFile.Id = desktopFile.Id;
-
-                    webApplicationFile.Hash = getFileHash(webApplicationFile.FullPath);
                     desktopFile.Hash = getFileHash(desktopFile.FullPath);
 
-                    if (!string.Equals(desktopFile.Hash, webApplicationFile.Hash))
+                    if (!fileDetails.IsCommon)
                         {
-                        var webIsNewer = new FileInfo(desktopFile.FullPath).LastWriteTime <
-                                         new FileInfo(webApplicationFile.FullPath).LastWriteTime;
+                        webApplicationFile.FullPath = desktopFile.FullPath;
+                        webApplicationFile.Hash = desktopFile.Hash;
+                        }
+                    else
+                        {
+                        webApplicationFile.Hash = getFileHash(webApplicationFile.FullPath);
+                        if (!string.Equals(desktopFile.Hash, webApplicationFile.Hash))
+                            {
+                            var webIsNewer = new FileInfo(desktopFile.FullPath).LastWriteTime <
+                                             new FileInfo(webApplicationFile.FullPath).LastWriteTime;
 
-                        var additionalMessage = (webIsNewer ? "Web" : "Desktop") + " file is newer!";
-                        MessageBox.Show(string.Format(@"File ""{0}"" is defferent for desktop and web!
+                            var additionalMessage = (webIsNewer ? "Web" : "Desktop") + " file is newer!";
+                            MessageBox.Show(string.Format(@"File ""{0}"" is defferent for desktop and web!
 
 {1}", fileSubPath, additionalMessage));
 
-                        return false;
+                            return false;
+                            }
                         }
                     }
                 }
