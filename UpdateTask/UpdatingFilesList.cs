@@ -21,5 +21,19 @@ namespace UpdateTask
 
         [XmlAttribute]
         public bool ReadyToUpdateSqlStructure { get; set; }
+
+        [XmlIgnore]
+        public string StringView
+            {
+            get
+                {
+                var result = new StringBuilder();
+                foreach (var uploadingFile in Files)
+                    {
+                    result.AppendLine(string.Format("{0} ({1})", uploadingFile.FilePath, uploadingFile.Group));
+                    }
+                return result.ToString();
+                }
+            }
         }
     }

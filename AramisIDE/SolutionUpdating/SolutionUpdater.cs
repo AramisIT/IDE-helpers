@@ -117,7 +117,7 @@ namespace AramisIDE.SolutionUpdating
 
             if (uploadFilesToWebServer(tasks))
                 {
-                new WebClientHelper(string.Format("{0}/sa/UpdateSolution?id={1}", solutionDetails.UpdateUrl, tasks.UpdateId)).PerformPostRequest();
+                //new WebClientHelper(string.Format("{0}/sa/UpdateSolution?id={1}", solutionDetails.UpdateUrl, tasks.UpdateId)).PerformPostRequest();
                 }
             }
 
@@ -182,6 +182,7 @@ namespace AramisIDE.SolutionUpdating
                     }
                 }
 
+            Trace.WriteLine("UploadFilesToWebServer: quit");
             return true;
             }
 
