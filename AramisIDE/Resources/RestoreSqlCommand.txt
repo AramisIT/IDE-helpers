@@ -32,8 +32,16 @@ DROP USER [sa_wms]
 GO
 CREATE USER [sa_wms] FOR LOGIN [sa_wms]
 GO
-
 EXEC sp_addrolemember N'db_owner', N'sa_wms'
+GO
+
+IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'AramisGuest')
+DROP USER [AramisGuest]
+GO
+CREATE USER [AramisGuest] FOR LOGIN [AramisGuest]
+GO
+
+EXEC sp_addrolemember N'db_owner', N'AramisGuest'
 GO
 
 print ' '
