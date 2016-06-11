@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Windows.Forms;
 using AramisIDE.Actions;
@@ -14,6 +15,7 @@ namespace AramisIDE.Interface
         {
         enum MenuItems
             {
+            CopyIpAddress,
             MakeCatalog,
             MakeDocument,
             MakeCatalogGuid,
@@ -23,7 +25,49 @@ namespace AramisIDE.Interface
             Quit
             }
 
-        private List<string> menuDescriptions = new List<string>() { 
+        private readonly List<string> menuDescriptions;
+
+        private static string getWirelessAddressCommand()
+            {
+            foreach (NetworkInterface networkInterface in NetworkInterface.GetAllNetworkInterfaces())
+                {
+                if (networkInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211
+                    && !networkInterface.Description.ToLower().Contains("virtual"))
+                    {
+                    foreach (UnicastIPAddressInformation ip in networkInterface.GetIPProperties().UnicastAddresses)
+                        {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                            {
+                            return ip.Address.ToString();
+                            }
+                        }
+                    }
+                }
+
+            return null;
+            }
+
+        private NotifyIcon trayIcon;
+        private List<SolutionDetails> solutions;
+        private SortedDictionary<string, string> passwords;
+        private Action quitApplication;
+        private string wirelessIdAddress;
+        private int menuCommandsIndexOffset;
+
+        public TrayMenu(List<SolutionDetails> solutions, SortedDictionary<string, string> passwords, Action quitApplication)
+            {
+            menuDescriptions = getBaseMenuCommands();
+
+            this.solutions = solutions;
+            this.passwords = passwords;
+            this.quitApplication = quitApplication;
+
+            createTrayIcon();
+            }
+
+        private List<string> getBaseMenuCommands()
+            {
+            var result = new List<string>() { 
         "Make catalog Win-Alt-C", 
         "Make document Win-Alt-L", 
         "Make catalog guid", 
@@ -32,17 +76,16 @@ namespace AramisIDE.Interface
         "Create restore script",
         "Quit" };
 
-        private NotifyIcon trayIcon;
-        private List<SolutionDetails> solutions;
-        private SortedDictionary<string, string> passwords;
-        private Action quitApplication;
-
-        public TrayMenu(List<SolutionDetails> solutions, SortedDictionary<string, string> passwords, Action quitApplication)
-            {
-            this.solutions = solutions;
-            this.passwords = passwords;
-            this.quitApplication = quitApplication;
-            createTrayIcon();
+            wirelessIdAddress = getWirelessAddressCommand();
+            if (!string.IsNullOrEmpty(wirelessIdAddress))
+                {
+                result.Insert(0, string.Format("Copy {0}", wirelessIdAddress));
+                }
+            else
+                {
+                menuCommandsIndexOffset = 1;
+                }
+            return result;
             }
 
         private void createTrayIcon()
@@ -166,7 +209,7 @@ namespace AramisIDE.Interface
                             int itemIndex = menuDescriptions.IndexOf(menuItem.Text);
                             if (itemIndex >= 0)
                                 {
-                                onMenuItemClick((MenuItems)itemIndex);
+                                onMenuItemClick((MenuItems)(menuCommandsIndexOffset + itemIndex));
                                 }
                             }
                     };
@@ -177,6 +220,10 @@ namespace AramisIDE.Interface
             {
             switch (menuItem)
                 {
+                case MenuItems.CopyIpAddress:
+                    Clipboard.SetText(wirelessIdAddress);
+                    return;
+
                 case MenuItems.Quit:
                     closeProgram();
                     return;
