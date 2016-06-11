@@ -58,7 +58,43 @@
     </DesktopOnlyFiles>
   </Solution>
 
-  <Solution Name="Greenhouse" Url="http://91.202.144.77" Directory="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
+  <Solution Name="Greenhouse test" Url="http://localhost:200" Directory="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
+            DesktopDirectory="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
+  
+  <!--<Solution Name="Greenhouse test" Url="http://localhost:50899" Directory="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
+            DesktopDirectory="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">-->
+
+    <Path>GreenhouseCore.dll</Path>
+
+    <Path>Aramis system.dll</Path>
+    <Path>ReportView.dll</Path>
+    <Path>MatrixReportViewBuilder.dll</Path>
+    <Path>RepositoryOfMatrixReportData.dll</Path>
+    <Path>AramisInfrastructure.dll</Path>
+    <Path>DBInteraction.dll</Path>
+    <Path>TableViewInterfaces.dll</Path>
+
+    <Path>AramisWpfComponents.dll</Path>
+
+    <DesktopOnlyFiles>
+      <Path>Greenhouse.exe</Path>
+      <Path>MatrixAdapterEditor.dll</Path>
+      <Path>AramisDesktopUserInterface.dll</Path>
+
+      <Path>PlaningWindow.dll</Path>
+      <Path>AramisEmailHelper.dll</Path>
+      <Path>LinePointer.dll</Path>
+      <Path>PackageViaWireless.dll</Path>
+      <Path>PackageConvertation.dll</Path>
+      <Path>MapCellDrawing.dll</Path>
+      <Path>MapCellsDataInterfaces.dll</Path>
+
+      <Path>AramisVisualizationLibriary.dll</Path>
+      <Path>AramisWPFLibriary.dll</Path>
+    </DesktopOnlyFiles>
+  </Solution>
+  
+  <Solution Name="Greenhouse" Url="http://91.202.144.14" Directory="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
             DesktopDirectory="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
     
     <Path>GreenhouseCore.dll</Path>
@@ -73,6 +109,39 @@
     
     <Path>AramisWpfComponents.dll</Path>
     
+    <DesktopOnlyFiles>
+      <Path>Greenhouse.exe</Path>
+      <Path>MatrixAdapterEditor.dll</Path>
+      <Path>AramisDesktopUserInterface.dll</Path>
+
+      <Path>PlaningWindow.dll</Path>
+      <Path>AramisEmailHelper.dll</Path>
+      <Path>LinePointer.dll</Path>
+      <Path>PackageViaWireless.dll</Path>
+      <Path>PackageConvertation.dll</Path>
+      <Path>MapCellDrawing.dll</Path>
+      <Path>MapCellsDataInterfaces.dll</Path>
+
+      <Path>AramisVisualizationLibriary.dll</Path>
+      <Path>AramisWPFLibriary.dll</Path>
+    </DesktopOnlyFiles>
+  </Solution>
+
+  <Solution Name="Greenhouse from office" Url="http://10.9.1.3" Directory="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
+            DesktopDirectory="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
+
+    <Path>GreenhouseCore.dll</Path>
+
+    <Path>Aramis system.dll</Path>
+    <Path>ReportView.dll</Path>
+    <Path>MatrixReportViewBuilder.dll</Path>
+    <Path>RepositoryOfMatrixReportData.dll</Path>
+    <Path>AramisInfrastructure.dll</Path>
+    <Path>DBInteraction.dll</Path>
+    <Path>TableViewInterfaces.dll</Path>
+
+    <Path>AramisWpfComponents.dll</Path>
+
     <DesktopOnlyFiles>
       <Path>Greenhouse.exe</Path>
       <Path>MatrixAdapterEditor.dll</Path>
