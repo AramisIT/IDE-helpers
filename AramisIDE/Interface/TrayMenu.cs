@@ -32,7 +32,9 @@ namespace AramisIDE.Interface
             foreach (NetworkInterface networkInterface in NetworkInterface.GetAllNetworkInterfaces())
                 {
                 if (networkInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211
-                    && !networkInterface.Description.ToLower().Contains("virtual"))
+                    && !networkInterface.Description.ToLower().Contains("virtual")
+                    && networkInterface.OperationalStatus == OperationalStatus.Up
+                    )
                     {
                     foreach (UnicastIPAddressInformation ip in networkInterface.GetIPProperties().UnicastAddresses)
                         {
@@ -53,15 +55,18 @@ namespace AramisIDE.Interface
         private Action quitApplication;
         private string wirelessIdAddress;
         private int menuCommandsIndexOffset;
+        private MenuItem copyAddressMenuItem;
+        private Action<Action> executeInMainThread;
 
-        public TrayMenu(List<SolutionDetails> solutions, SortedDictionary<string, string> passwords, Action quitApplication)
+        public TrayMenu(List<SolutionDetails> solutions, SortedDictionary<string, string> passwords, Action quitApplication,
+                Action<Action> executeInMainThread)
             {
             menuDescriptions = getBaseMenuCommands();
 
             this.solutions = solutions;
             this.passwords = passwords;
             this.quitApplication = quitApplication;
-
+            this.executeInMainThread = executeInMainThread;
             createTrayIcon();
             }
 
@@ -76,16 +81,23 @@ namespace AramisIDE.Interface
         "Create restore script",
         "Quit" };
 
-            wirelessIdAddress = getWirelessAddressCommand();
-            if (!string.IsNullOrEmpty(wirelessIdAddress))
-                {
-                result.Insert(0, string.Format("Copy {0}", wirelessIdAddress));
-                }
-            else
-                {
-                menuCommandsIndexOffset = 1;
-                }
+            result.Insert(0, getCopyWirelessAddressCommand());
+
+            //if (!string.IsNullOrEmpty(wirelessIdAddress))
+            //    {
+            //    result.Insert(0, string.Format("Copy {0}", wirelessIdAddress));
+            //    }
+            //else
+            //    {
+            //    menuCommandsIndexOffset = 1;
+            //    }
             return result;
+            }
+
+        private string getCopyWirelessAddressCommand()
+            {
+            wirelessIdAddress = getWirelessAddressCommand();
+            return string.IsNullOrEmpty(wirelessIdAddress) ? "< No wireless >" : string.Format("Copy {0}", wirelessIdAddress);
             }
 
         private void createTrayIcon()
@@ -102,11 +114,20 @@ namespace AramisIDE.Interface
 
             addHelpersItems(menu);
 
+            var ipCheckerTimer = new Timer() { Interval = 1000 * 60 };
+            ipCheckerTimer.Tick += ipCheckerTimer_Tick;
+            ipCheckerTimer.Start();
+
             addUpdateSolutionsItems(menu);
 
             addCopyToClipboardItems(menu);
 
             return menu;
+            }
+
+        void ipCheckerTimer_Tick(object sender, EventArgs e)
+            {
+            executeInMainThread(() => copyAddressMenuItem.Text = getCopyWirelessAddressCommand());
             }
 
         private void addCopyToClipboardItems(ContextMenu menu)
@@ -198,6 +219,7 @@ namespace AramisIDE.Interface
 
         private void addHelpersItems(ContextMenu menu)
             {
+            var isCopyAddressMenuItem = true;
             foreach (var item in menuDescriptions)
                 {
                 var newItem = menu.MenuItems.Add(item);
@@ -213,6 +235,11 @@ namespace AramisIDE.Interface
                                 }
                             }
                     };
+                if (isCopyAddressMenuItem)
+                    {
+                    isCopyAddressMenuItem = false;
+                    copyAddressMenuItem = newItem;
+                    }
                 }
             }
 

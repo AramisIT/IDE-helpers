@@ -1,4 +1,5 @@
-﻿using AramisIDE.Interface;
+﻿using System;
+using AramisIDE.Interface;
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
@@ -15,7 +16,7 @@ namespace AramisIDE
             {
             solutions = new SolutionsReader().ReadSolutions();
             passwords = new PasswordsReader().ReadPasswords();
-            new TrayMenu(solutions, passwords, base.ExitThreadCore);
+            new TrayMenu(solutions, passwords, base.ExitThreadCore, executeInMainThread);
             updateHotKeys();
             }
 
@@ -38,10 +39,17 @@ namespace AramisIDE
             {
                 while (true)
                     {
-                    mainSynchronizationContext.Send((obj) => updateHotKeys(), null);
+                    executeInMainThread(updateHotKeys);
                     Thread.Sleep(5000);
                     }
             }) { IsBackground = true }.Start();
+            }
+
+        private void executeInMainThread(Action action)
+            {
+            if (action == null) return;
+
+            mainSynchronizationContext.Send((obj) => action(), null);
             }
         }
     }
