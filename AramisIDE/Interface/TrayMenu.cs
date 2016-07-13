@@ -114,7 +114,7 @@ namespace AramisIDE.Interface
 
             addHelpersItems(menu);
 
-            var ipCheckerTimer = new Timer() { Interval = 1000 * 60 };
+            var ipCheckerTimer = new Timer() { Interval = 1000 * 10 };
             ipCheckerTimer.Tick += ipCheckerTimer_Tick;
             ipCheckerTimer.Start();
 
@@ -223,22 +223,30 @@ namespace AramisIDE.Interface
             foreach (var item in menuDescriptions)
                 {
                 var newItem = menu.MenuItems.Add(item);
-                newItem.Click += (sender, e) =>
-                    {
-                        MenuItem menuItem = sender as MenuItem;
-                        if (menuItem != null)
-                            {
-                            int itemIndex = menuDescriptions.IndexOf(menuItem.Text);
-                            if (itemIndex >= 0)
-                                {
-                                onMenuItemClick((MenuItems)(menuCommandsIndexOffset + itemIndex));
-                                }
-                            }
-                    };
                 if (isCopyAddressMenuItem)
                     {
                     isCopyAddressMenuItem = false;
                     copyAddressMenuItem = newItem;
+
+                    newItem.Click += (sender, e) =>
+                        {
+                            Clipboard.SetText(getWirelessAddressCommand() ?? "<connection isn't detected!>");
+                        };
+                    }
+                else
+                    {
+                    newItem.Click += (sender, e) =>
+                        {
+                            MenuItem menuItem = sender as MenuItem;
+                            if (menuItem != null)
+                                {
+                                int itemIndex = menuDescriptions.IndexOf(menuItem.Text);
+                                if (itemIndex >= 0)
+                                    {
+                                    onMenuItemClick((MenuItems)(menuCommandsIndexOffset + itemIndex));
+                                    }
+                                }
+                        };
                     }
                 }
             }
