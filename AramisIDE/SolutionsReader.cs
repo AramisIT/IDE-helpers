@@ -92,9 +92,9 @@ namespace AramisIDE
             {
             var solutionDetails = new SolutionDetails()
                 {
-                    Name = solution.Attribute("Name").Value,
-                    UpdateUrl = solution.Attribute("Url").Value.TrimEnd(new[] { '/' }),
-                    WebRootDirectory = solution.Attribute("Directory").Value
+                Name = solution.Attribute("Name").Value,
+                UpdateUrl = solution.Attribute("Url").Value.TrimEnd(new[] { '/' }),
+                WebRootDirectory = solution.Attribute("Directory").Value
                 };
 
             if (solution.Attribute("Login") != null)
@@ -111,21 +111,22 @@ namespace AramisIDE
                 {
                 var desktopFilesGroup = new FilesGroup()
                     {
-                        Type = FilesGroupTypes.DesktopBin,
-                        CopyAll = false,
-                        Path = solution.Attribute("DesktopDirectory").Value
+                    Type = FilesGroupTypes.DesktopBin,
+                    CopyAll = false,
+                    Path = solution.Attribute("DesktopDirectory").Value
                     };
                 readDesktopFiles(solution.Elements(), desktopFilesGroup, true);
                 solutionDetails.FilesGroups.Add(desktopFilesGroup);
                 }
 
-            addWebFilesGroups(solutionDetails.FilesGroups, solutionDetails.WebRootDirectory, hardLinkedFilesByGroupType);
+            addWebFilesGroups(solutionDetails.FilesGroups, solutionDetails.WebRootDirectory, hardLinkedFilesByGroupType,
+                solutionDetails.DirectoriesToIgnore);
             solutionDetails.CheckFilesDetails();
             result.Add(solutionDetails);
             }
 
         private void addWebFilesGroups(List<FilesGroup> filesGroups, string webDirectoryPath,
-            Dictionary<FilesGroupTypes, HardLinkedFiles> hardLinkedFilesByGroupType)
+            Dictionary<FilesGroupTypes, HardLinkedFiles> hardLinkedFilesByGroupType, HashSet<string> directoriesToIgnore)
             {
             // root can be like "x:\" or "x:\Projects\MyWebApp" or "x:\Projects\MyWebApp\"
             var pathPrefix = webDirectoryPath.EndsWith("\\")
@@ -138,11 +139,21 @@ namespace AramisIDE
                 {
                 var filesGroup = new FilesGroup()
                     {
-                        Type = groupType,
-                        CopyAll = true,
-                        Path = pathPrefix + DefaultSubdirectories.DirectoriesNames[groupType]
+                    Type = groupType,
+                    CopyAll = true,
+                    Path = pathPrefix + DefaultSubdirectories.DirectoriesNames[groupType]
                     };
                 filesGroups.Add(filesGroup);
+
+                if (groupType == FilesGroupTypes.WebContent)
+                    {
+                    const string imagesFolder = "Images";
+                    const string storageFolder = "Storage";
+                    const string thumbnailsFolder = "AramisModelsImages";
+
+                    directoriesToIgnore.Add(Path.Combine(filesGroup.Path, imagesFolder, storageFolder));
+                    directoriesToIgnore.Add(Path.Combine(filesGroup.Path, imagesFolder, thumbnailsFolder));
+                    }
 
                 HardLinkedFiles hardLinkedFiles;
                 if (hardLinkedFilesByGroupType.TryGetValue(groupType, out hardLinkedFiles))
@@ -163,10 +174,10 @@ namespace AramisIDE
 
             var rootDir = new FilesGroup()
                 {
-                    Type = FilesGroupTypes.WebRoot,
-                    CopyAll = false,
-                    Path = webDirectoryPath,
-                    DirectoriesToAdd = new List<string>() { "fonts" }
+                Type = FilesGroupTypes.WebRoot,
+                CopyAll = false,
+                Path = webDirectoryPath,
+                DirectoriesToAdd = new List<string>() { "fonts" }
                 };
             webRootFiles.ForEach(subPath =>
                 {
@@ -175,8 +186,8 @@ namespace AramisIDE
                         {
                         rootDir.Files.Add(new FileDetails()
                             {
-                                SubPath = subPath,
-                                FullPath = fullPath
+                            SubPath = subPath,
+                            FullPath = fullPath
                             });
                         }
                 });
@@ -192,8 +203,8 @@ namespace AramisIDE
                     {
                     var filePath = new FileDetails()
                         {
-                            SubPath = node.Value.Trim(),
-                            IsCommon = isCommonFiles,
+                        SubPath = node.Value.Trim(),
+                        IsCommon = isCommonFiles,
                         };
 
                     filePath.FullPath = desktopFilesGroup.BuildFullFilePath(filePath.SubPath);

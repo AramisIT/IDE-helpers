@@ -387,12 +387,12 @@ namespace AramisIDE.SolutionUpdating
 
                 var uploadingFile = new UploadingFile()
                     {
-                        FullPath = kvp.Key,
-                        IsDesktop = isDesktop,
-                        FileSize = fileInfo.Length,
-                        Group = (FilesGroupTypes)Enum.Parse(typeof(FilesGroupTypes), filesGroup.Type.ToString()),
-                        ModifiedTime = fileInfo.LastWriteTime,
-                        FilePath = fileDetails.SubPath
+                    FullPath = kvp.Key,
+                    IsDesktop = isDesktop,
+                    FileSize = fileInfo.Length,
+                    Group = (FilesGroupTypes)Enum.Parse(typeof(FilesGroupTypes), filesGroup.Type.ToString()),
+                    ModifiedTime = fileInfo.LastWriteTime,
+                    FilePath = fileDetails.SubPath
                     }.CreateId();
                 uploadingFile.SetFilePath(fileDetails.SubPath);
 
@@ -437,13 +437,15 @@ namespace AramisIDE.SolutionUpdating
 
                 result.Add(fileInfo.FullName, new FileDetails()
                     {
-                        FullPath = fullPath,
-                        SubPath = subPath
+                    FullPath = fullPath,
+                    SubPath = subPath
                     });
                 }
 
             foreach (var dirInfo in currentDirInfo.GetDirectories())
                 {
+                if (solutionDetails.DirectoriesToIgnore.Contains(dirInfo.FullName)) continue;
+
                 findAllFiles(result, dirInfo.FullName, filesGroup);
                 }
             }

@@ -16,11 +16,14 @@ namespace AramisIDE
 
         public string WebRootDirectory { get; set; }
 
+        public HashSet<string> DirectoriesToIgnore { get; private set; }
+
         public List<FilesGroup> FilesGroups { get; private set; }
 
         public SolutionDetails()
             {
             FilesGroups = new List<FilesGroup>();
+            DirectoriesToIgnore = new HashSet<string>();
             }
 
         public override string ToString()
