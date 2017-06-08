@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using AramisIDE.Actions;
 using AramisIDE.SolutionUpdating;
 using AramisIDE.SourceCodeHelper;
+using ScreenBrightness;
 
 namespace AramisIDE.Interface
     {
@@ -72,11 +73,11 @@ namespace AramisIDE.Interface
 
         private List<string> getBaseMenuCommands()
             {
-            var result = new List<string>() { 
-        "Make catalog Win-Alt-C", 
-        "Make document Win-Alt-L", 
-        "Make catalog guid", 
-        "Make document guid", 
+            var result = new List<string>() {
+        "Make catalog Win-Alt-C",
+        "Make document Win-Alt-L",
+        "Make catalog guid",
+        "Make document guid",
         "StartDate and FinishDate",
         "Create restore script",
         "Quit" };
@@ -106,6 +107,25 @@ namespace AramisIDE.Interface
             trayIcon.Icon = Properties.Resources.ProgramIcon;
             trayIcon.ContextMenu = createNotifyMenu();
             trayIcon.Visible = true;
+            trayIcon.MouseClick += trayIcon_MouseClick;
+            }
+
+        private Form brightnessForm;
+
+        private void trayIcon_MouseClick(object sender, MouseEventArgs e)
+            {
+            if (e.Button == MouseButtons.Left)
+                {
+                if (brightnessForm != null && !brightnessForm.IsDisposed)
+                    {
+                    brightnessForm.Close();
+                    }
+                else
+                    {
+                    brightnessForm = new BrightnessForm();
+                    ((BrightnessForm)brightnessForm).ShowEditor();
+                    }
+                }
             }
 
         private ContextMenu createNotifyMenu()
@@ -119,7 +139,6 @@ namespace AramisIDE.Interface
             ipCheckerTimer.Start();
 
             addUpdateSolutionsItems(menu);
-
             addCopyToClipboardItems(menu);
 
             return menu;

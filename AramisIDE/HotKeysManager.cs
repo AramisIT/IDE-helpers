@@ -23,8 +23,10 @@ namespace AramisIDE
             {
             keyboardHook.RegisterHotKey(ModifierKeys.Win | ModifierKeys.Alt, Keys.C);
             keyboardHook.RegisterHotKey(ModifierKeys.Win | ModifierKeys.Alt, Keys.L);
-            keyboardHook.RegisterHotKey(ModifierKeys.Win | ModifierKeys.Alt, Keys.L);
             keyboardHook.RegisterHotKey(ModifierKeys.Win | ModifierKeys.Shift, Keys.S);
+
+            keyboardHook.RegisterHotKey(ModifierKeys.Win | ModifierKeys.Alt, Keys.O);
+            keyboardHook.RegisterHotKey(ModifierKeys.Win | ModifierKeys.Alt, Keys.P);
 
             keyboardHook.KeyPressed += keyboardHook_KeyPressed;
             }
@@ -33,6 +35,14 @@ namespace AramisIDE
             {
             switch (e.Key)
                 {
+                case Keys.O:
+                    DisplayBrightness.ReduceBrightness();
+                    break;
+
+                case Keys.P:
+                    DisplayBrightness.IncreaseBrightness();
+                    break;
+
                 case Keys.C:
                     new NewCatalog();
                     break;

@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +59,12 @@
     <Compile Include="Actions\DocumentGuid.cs" />
     <Compile Include="Actions\RestoreScriptCreator.cs" />
     <Compile Include="AramisIDEApplicationContext.cs" />
+    <Compile Include="BrightnessForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrightnessForm.Designer.cs">
+      <DependentUpon>BrightnessForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DialogShower.cs" />
     <Compile Include="HotKeysManager.cs" />
     <Compile Include="Models\FileDetails.cs" />
@@ -70,6 +77,7 @@
     <Compile Include="SolutionUpdating\SolutionUpdater.cs" />
     <Compile Include="SourceCodeHelper\PredefinedStoredObjectsUpdater.cs" />
     <Compile Include="UpdateLogger.cs" />
+    <Compile Include="Utils\DisplayBrightness.cs" />
     <Compile Include="Utils\FileHashGenerator.cs" />
     <Compile Include="Utils\FileUploader\HttpFileUploader.cs" />
     <Compile Include="Utils\KeyboardHook.cs" />
@@ -77,6 +85,9 @@
     <Compile Include="Interface\TrayMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BrightnessForm.resx">
+      <DependentUpon>BrightnessForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -103,6 +114,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Resources\brightness.png" />
     <Content Include="Solutions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

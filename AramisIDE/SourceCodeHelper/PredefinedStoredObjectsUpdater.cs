@@ -19,11 +19,13 @@ namespace AramisIDE.SourceCodeHelper
         public PredefinedStoredObjectsUpdater(string predefinedStoredObjectsSourceCodeFilePath, string connectionString)
             {
             PredefinedStoredObjectsUpdater.predefinedStoredObjectsSourceCodeFilePath = predefinedStoredObjectsSourceCodeFilePath;
-            PredefinedStoredObjectsUpdater.connectionString = string.IsNullOrEmpty(connectionString) ? TestConnect.INTEGRATED_SECURITY_DEFAULT_CONNECTION_STRING : connectionString;
+
+            const string INTEGRATED_SECURITY_DEFAULT_CONNECTION_STRING = "Data Source=localhost; Initial Catalog=master;Integrated Security=True";
+            PredefinedStoredObjectsUpdater.connectionString = string.IsNullOrEmpty(connectionString) ? INTEGRATED_SECURITY_DEFAULT_CONNECTION_STRING : connectionString;
             }
 
         public PredefinedStoredObjectsUpdater()
-        { }
+            { }
 
         internal bool Update()
             {
