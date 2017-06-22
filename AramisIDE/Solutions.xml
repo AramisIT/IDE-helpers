@@ -1,4 +1,4 @@
-﻿<Root connection-string="Server=localhost;Database=master;User Id=sa; Password=123;" predefined-stored-objects-path="X:\My work\Projects\UTK\Aramis.NET\DBInteraction\Resources\DatabaseStoredObjects.xml">
+﻿<Root aramis-user-name="AramisDatabaseUser" connection-string="Server=localhost;Database=master;User Id=sa; Password=123;" predefined-stored-objects-path="X:\My work\Projects\UTK\Aramis.NET\DBInteraction\Resources\DatabaseStoredObjects.xml">
   <References Type="WebContent" Directory="X:\My work\Projects\WebCore\WebCore\Content">
     <Path>aramis.css</Path>
     <Path>jquery-ui.custom.css</Path>

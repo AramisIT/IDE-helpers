@@ -15,13 +15,15 @@ namespace AramisIDE.SourceCodeHelper
         {
         private static string predefinedStoredObjectsSourceCodeFilePath;
         private static string connectionString;
+        private bool useIntegratedSecurityConnectionString;
 
         public PredefinedStoredObjectsUpdater(string predefinedStoredObjectsSourceCodeFilePath, string connectionString)
             {
             PredefinedStoredObjectsUpdater.predefinedStoredObjectsSourceCodeFilePath = predefinedStoredObjectsSourceCodeFilePath;
 
+            useIntegratedSecurityConnectionString = string.IsNullOrEmpty(connectionString);
             const string INTEGRATED_SECURITY_DEFAULT_CONNECTION_STRING = "Data Source=localhost; Initial Catalog=master;Integrated Security=True";
-            PredefinedStoredObjectsUpdater.connectionString = string.IsNullOrEmpty(connectionString) ? INTEGRATED_SECURITY_DEFAULT_CONNECTION_STRING : connectionString;
+            PredefinedStoredObjectsUpdater.connectionString = useIntegratedSecurityConnectionString ? INTEGRATED_SECURITY_DEFAULT_CONNECTION_STRING : connectionString;
             }
 
         public PredefinedStoredObjectsUpdater()
@@ -57,7 +59,7 @@ namespace AramisIDE.SourceCodeHelper
             string info;
             try
                 {
-                var storedObjectsSqlServerData = new StoredObjectsSqlServerData(connectionString);
+                var storedObjectsSqlServerData = new StoredObjectsSqlServerData(connectionString, buildConnectionString);
                 newFileData = storedObjectsFileData.BuildUpdatedDocument(storedObjectsSqlServerData, out info).ToString();
                 }
             catch (Exception exp)
@@ -85,6 +87,13 @@ namespace AramisIDE.SourceCodeHelper
                 }
 
             return true;
+            }
+
+        private string buildConnectionString(string specifiedDatabaseName)
+            {
+            return connectionString;
+            //$@"Server=""{serverName}""; Initial Catalog={specifiedDatabaseName}; "
+            //   + (string.IsNullOrEmpty(userId) ? "Integrated Security=True" : $@"user id=""{TestConnect.USER_NAME}""; password=""{TestConnect.USER_PASSWORD}""");
             }
 
         private bool ask(string message)

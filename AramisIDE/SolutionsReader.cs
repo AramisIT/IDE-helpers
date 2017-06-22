@@ -17,6 +17,8 @@ namespace AramisIDE
         {
         public static readonly string APPLICATION_PATH = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
+        public static string AramisSqlUser { get; private set; }
+
         private static readonly XAttribute EMPTY_ATTRIBUTE = new XAttribute("Empty", string.Empty);
 
         private readonly List<string> webRootFiles = new List<string> { "packages.config", "Global.asax" };
@@ -37,6 +39,8 @@ namespace AramisIDE
                         {
                         nodeReader.MoveToContent();
                         XDocument document = XDocument.Load(nodeReader);
+
+                        AramisSqlUser = (document.Root.Attribute("aramis-user-name") ?? EMPTY_ATTRIBUTE).Value;
 
                         new PredefinedStoredObjectsUpdater(
                             (document.Root.Attribute("predefined-stored-objects-path") ?? EMPTY_ATTRIBUTE).Value,

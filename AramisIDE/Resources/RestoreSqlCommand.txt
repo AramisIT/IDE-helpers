@@ -27,12 +27,12 @@ USE [{0}]
 
 GO
 
-IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'sa_wms')
-DROP USER [sa_wms]
+IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'{2}')
+DROP USER [{2}]
 GO
-CREATE USER [sa_wms] FOR LOGIN [sa_wms]
+CREATE USER [{2}] FOR LOGIN [{2}]
 GO
-EXEC sp_addrolemember N'db_owner', N'sa_wms'
+EXEC sp_addrolemember N'db_owner', N'{2}'
 GO
 
 IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'AramisGuest')

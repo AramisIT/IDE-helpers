@@ -45,7 +45,7 @@ namespace AramisIDE.Actions
                 path = "<path to back up>";
                 }
 
-            Clipboard.SetText(string.Format(AramisIDE.Properties.Resources.RestoreSqlCommand, databaseName, path));
+            Clipboard.SetText(string.Format(AramisIDE.Properties.Resources.RestoreSqlCommand, databaseName, path, SolutionsReader.AramisSqlUser));
             }
         }
     }
