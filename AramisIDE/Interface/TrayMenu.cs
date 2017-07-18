@@ -23,6 +23,7 @@ namespace AramisIDE.Interface
             MakeDocumentGuid,
             StartDateAndFinishDate,
             CreateRestoreScript,
+            ShowGrayImageFromBase64String,
             Quit
             }
 
@@ -80,6 +81,7 @@ namespace AramisIDE.Interface
         "Make document guid",
         "StartDate and FinishDate",
         "Create restore script",
+        "Show gray image",
         "Quit" };
 
             result.Insert(0, getCopyWirelessAddressCommand());
@@ -284,6 +286,10 @@ namespace AramisIDE.Interface
 
                 case MenuItems.CreateRestoreScript:
                     new RestoreScriptCreator();
+                    return;
+
+                case MenuItems.ShowGrayImageFromBase64String:
+                    new ImageViewer().Show();
                     return;
 
                 case MenuItems.MakeCatalogGuid:

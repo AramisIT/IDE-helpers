@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
@@ -39,7 +41,9 @@
       <HintPath>..\..\..\UTK\Aramis.NET\DBInteraction\bin\Release\DBInteraction.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -67,6 +71,12 @@
     </Compile>
     <Compile Include="DialogShower.cs" />
     <Compile Include="HotKeysManager.cs" />
+    <Compile Include="ImageViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageViewer.Designer.cs">
+      <DependentUpon>ImageViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\FileDetails.cs" />
     <Compile Include="Models\FilesGroup.cs" />
     <Compile Include="Models\HardLinkedFiles.cs" />
@@ -77,6 +87,7 @@
     <Compile Include="SolutionUpdating\SolutionUpdater.cs" />
     <Compile Include="SourceCodeHelper\PredefinedStoredObjectsUpdater.cs" />
     <Compile Include="UpdateLogger.cs" />
+    <Compile Include="Utils\BitmapCreator.cs" />
     <Compile Include="Utils\DisplayBrightness.cs" />
     <Compile Include="Utils\FileHashGenerator.cs" />
     <Compile Include="Utils\FileUploader\HttpFileUploader.cs" />
@@ -87,6 +98,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BrightnessForm.resx">
       <DependentUpon>BrightnessForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageViewer.resx">
+      <DependentUpon>ImageViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
