@@ -113,19 +113,41 @@ namespace AramisIDE.Interface
             }
 
         private Form brightnessForm;
+        private bool showMenuOnLeftClick;
+
+        private void showMenu()
+            {
+            System.Reflection.MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            mi.Invoke(trayIcon, null);
+            }
 
         private void trayIcon_MouseClick(object sender, MouseEventArgs e)
             {
             if (e.Button == MouseButtons.Left)
                 {
+                if (showMenuOnLeftClick)
+                    {
+                    showMenu();
+                    return;
+                    }
                 if (brightnessForm != null && !brightnessForm.IsDisposed)
                     {
                     brightnessForm.Close();
                     }
                 else
                     {
-                    brightnessForm = new BrightnessForm();
-                    ((BrightnessForm)brightnessForm).ShowEditor();
+                    var brightnessForm = new BrightnessForm();
+                    var initException = brightnessForm.Init();
+                    if (initException == null)
+                        {
+                        brightnessForm = brightnessForm;
+                        ((BrightnessForm)brightnessForm).ShowEditor();
+                        }
+                    else
+                        {
+                        showMenuOnLeftClick = true;
+                        showMenu();
+                        }
                     }
                 }
             }

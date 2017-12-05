@@ -17,11 +17,17 @@ namespace AramisIDE
             InitializeComponent();
             }
 
+        private string clipBoardData;
+
         private void ImageViewer_Load(object sender, EventArgs e)
             {
             try
                 {
-                base64StringTextBox.Text = Clipboard.GetText() ?? string.Empty;
+                clipBoardData = Clipboard.GetText() ?? string.Empty;
+                if (clipBoardData.Length < 100000)
+                    {
+                    base64StringTextBox.Text = clipBoardData;
+                    }
                 }
             catch
                 {
@@ -30,7 +36,7 @@ namespace AramisIDE
 
         private void button1_Click(object sender, EventArgs e)
             {
-            pictureBox.Image = base64StringTextBox.Text.ToBitmap(Convert.ToInt32(widthTextBox.Text),
+            pictureBox.Image = (string.IsNullOrEmpty(base64StringTextBox.Text) ? clipBoardData : base64StringTextBox.Text).ToBitmap(Convert.ToInt32(widthTextBox.Text),
                 Convert.ToInt32(heightTextBox.Text));
             }
 

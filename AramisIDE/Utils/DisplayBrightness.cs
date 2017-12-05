@@ -36,7 +36,7 @@ namespace AramisIDE.Utils
             }
 
         //array of valid brightness values in percent
-        public static byte[] GetBrightnessLevels()
+        public static byte[] GetBrightnessLevels(out Exception exception)
             {
             //define scope (namespace)
             System.Management.ManagementScope s = new System.Management.ManagementScope("root\\WMI");
@@ -47,6 +47,7 @@ namespace AramisIDE.Utils
             //output current brightness
             System.Management.ManagementObjectSearcher mos = new System.Management.ManagementObjectSearcher(s, q);
             byte[] BrightnessLevels = new byte[0];
+            exception = null;
 
             try
                 {
@@ -65,10 +66,9 @@ namespace AramisIDE.Utils
                 mos.Dispose();
 
                 }
-            catch (Exception)
+            catch (Exception exp)
                 {
-                MessageBox.Show("Sorry, Your System does not support this brightness control...");
-
+                exception = exp;// new Exception("Sorry, Your System does not support this brightness control...");
                 }
 
             return BrightnessLevels;
@@ -104,7 +104,8 @@ namespace AramisIDE.Utils
 
         private static void changeBrightnessLevel(bool increase)
             {
-            var levels = GetBrightnessLevels().ToList();
+            Exception exp;
+            var levels = GetBrightnessLevels(out exp).ToList();
             byte level = (byte)GetBrightness();
             var currentIndex = levels.IndexOf(level);
             if (currentIndex == (increase ? levels.Count - 1 : 0)) return;

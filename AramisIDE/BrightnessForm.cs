@@ -14,14 +14,31 @@ namespace ScreenBrightness
         public BrightnessForm()
             {
             InitializeComponent();
+            }
 
-            brightnessOptions = DisplayBrightness.GetBrightnessLevels().ToList(); //get the level array for this system
-            if (brightnessOptions.Count > 0) //"WmiMonitorBrightness" is not supported by the system
+        public Exception Init()
+            {
+            try
                 {
-                trackBar.TickFrequency = brightnessOptions.Count / 10; //adjust the trackbar ticks according the number of possible brightness levels
-                trackBar.Maximum = brightnessOptions.Count - 1;
-                check_brightness();
+                Exception exp;
+                brightnessOptions = DisplayBrightness.GetBrightnessLevels(out exp).ToList(); //get the level array for this system
+                if (exp != null)
+                    {
+                    return exp;
+                    }
+                if (brightnessOptions.Count > 0) //"WmiMonitorBrightness" is not supported by the system
+                    {
+                    trackBar.TickFrequency = brightnessOptions.Count / 10; //adjust the trackbar ticks according the number of possible brightness levels
+                    trackBar.Maximum = brightnessOptions.Count - 1;
+                    check_brightness();
+                    }
                 }
+            catch (Exception exp)
+                {
+                return exp;
+                }
+
+            return null;
             }
 
         private void check_brightness()
