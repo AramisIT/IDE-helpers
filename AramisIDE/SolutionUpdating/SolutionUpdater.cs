@@ -400,11 +400,34 @@ namespace AramisIDE.SolutionUpdating
                 }
             }
 
+        private bool checkIsReactSourceFolder(DirectoryInfo dir)
+            {
+            return dir.Name.EndsWith("-react", StringComparison.InvariantCultureIgnoreCase) 
+                || dir.Name.Equals("react", StringComparison.InvariantCultureIgnoreCase);
+            }
+
+        private bool checkIsJavascriptDevelopmentModeFile(FileInfo file, DirectoryInfo dir)
+            {
+            if (checkIsReactSourceFolder(dir))
+                {
+                return !file.Name.Equals("bundle.js", StringComparison.InvariantCultureIgnoreCase);
+                }
+
+            return false;
+            }
+
+        private bool ignoreFile(FileInfo file, DirectoryInfo dir)
+            {
+            if (this.checkIsJavascriptDevelopmentModeFile(file, dir)) return true;
+
+            return false;
+            }
+
         private void findAllFiles(Dictionary<string, FileDetails> result, string path, FilesGroup filesGroup)
             {
             var currentDirInfo = new DirectoryInfo(path);
 
-            foreach (var fileInfo in currentDirInfo.GetFiles())
+            foreach (FileInfo fileInfo in currentDirInfo.GetFiles())
                 {
                 var skipFile = false;
                 foreach (var kvp in filesGroup.IgnoreFilesSuffixes)
@@ -425,7 +448,7 @@ namespace AramisIDE.SolutionUpdating
                         break;
                         }
                     }
-                if (skipFile) continue;
+                if (skipFile || ignoreFile(fileInfo, currentDirInfo)) continue;
 
                 var subPath = fileInfo.FullName.Substring(filesGroup.Path.Length + 1);
                 string fullPath;
@@ -441,6 +464,8 @@ namespace AramisIDE.SolutionUpdating
                     SubPath = subPath
                     });
                 }
+
+            if (checkIsReactSourceFolder(currentDirInfo)) return;
 
             foreach (var dirInfo in currentDirInfo.GetDirectories())
                 {
