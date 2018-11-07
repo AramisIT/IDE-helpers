@@ -12,3 +12,28 @@ isDumbFile = el => [...el.querySelectorAll(".diff-container .heading .primary h1
 
 document.querySelectorAll(".iterable-item.bb-udiff.maskable.commentable-diff")
 	.forEach(el => isDumbFile(el) && hideNode(el));
+
+
+// time tracking
+
+const container = document.createElement('div');
+container.style.cssText = 'text-align:center;font-size:16px;padding:1em;position:fixed;bottom:0px;right:0px;width:4em;line-height:1.5em;height:1.5em;opacity:0.9;z-index:10000;background:lime';
+container.id="time-spends-value";
+document.body.appendChild(container);
+
+const pad2 = num => {
+	const s = "0" + num;
+    return s.substr(s.length-2);
+};
+
+const startTime = new Date().getTime();
+window.setInterval(() => {
+	const totalSeconds = Math.ceil((new Date().getTime() - startTime) / 1000);
+	const sec = totalSeconds % 60;
+	const totalMinutes = (totalSeconds-sec) / 60;
+	const min = totalMinutes % 60;
+	const h = (totalMinutes - min) / 60;
+	container.textContent = `${h}:${pad2(min)}:${pad2(sec)}`;
+}, 500);
+
+console.clear();
