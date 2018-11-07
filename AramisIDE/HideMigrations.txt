@@ -1,0 +1,14 @@
+﻿const TEXT_NODE = 3;
+let processElement, isDumbFile, containsDumbFileName, hideNode;
+
+hideNode = el => el.style.display = 'none';
+
+isDumbFileName = name => name.match(/.*(\.CoreDb\/Migrations\/)\b\d{5}/);
+
+containsDumbFileName = el => (el.nodeType === 3 && isDumbFileName(el.nodeValue));
+
+isDumbFile = el => [...el.querySelectorAll(".diff-container .heading .primary h1.filename")[0].childNodes]
+	.some(containsDumbFileName);
+
+document.querySelectorAll(".iterable-item.bb-udiff.maskable.commentable-diff")
+	.forEach(el => isDumbFile(el) && hideNode(el));

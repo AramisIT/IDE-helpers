@@ -81,6 +81,7 @@
     <Compile Include="Models\FilesGroup.cs" />
     <Compile Include="Models\HardLinkedFiles.cs" />
     <Compile Include="Models\SolutionDetails.cs" />
+    <Compile Include="HideMigrationsReader.cs" />
     <Compile Include="PasswordsReader.cs" />
     <Compile Include="SolutionsReader.cs" />
     <Compile Include="SolutionUpdating\IgnoreCaseStringEqualityComparer.cs" />
@@ -124,6 +125,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="HideMigrations.txt">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Passwords.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

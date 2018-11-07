@@ -257,6 +257,12 @@ namespace AramisIDE.Interface
                 {
                     new PredefinedStoredObjectsUpdater().Update();
                 });
+
+            menu.MenuItems.Add("Hide migrations script", (sender, e) =>
+                {
+                Clipboard.SetText(HideMigrationsReader.Script);
+                });
+
             // menu.MenuItems.Add("Update hot keys", (sender, e) => new HotKeysManager(MainForm.Instance as MainForm));
             }
 
