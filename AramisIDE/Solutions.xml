@@ -1,10 +1,10 @@
-﻿<Root aramis-user-name="AramisDatabaseUser" connection-string="Server=localhost;Database=master;User Id=sa; Password=123;" predefined-stored-objects-path="X:\My work\Projects\UTK\Aramis.NET\DBInteraction\Resources\DatabaseStoredObjects.xml">
-  <References Type="WebContent" Directory="X:\My work\Projects\WebCore\WebCore\Content">
+﻿<Root aramis-user-name="AramisDatabaseUser" connection-string="Server=localhost;Database=master;User Id=sa; Password=123;" predefined-stored-objects-path="R:\My work\Projects\UTK\Aramis.NET\DBInteraction\Resources\DatabaseStoredObjects.xml">
+  <References Type="WebContent" Directory="R:\My work\Projects\WebCore\WebCore\Content">
     <Path>aramis.css</Path>
     <Path>jquery-ui.custom.css</Path>
   </References>
 
-  <References Type="WebScripts" Directory="X:\My work\Projects\WebCore\WebCore\Scripts\">
+  <References Type="WebScripts" Directory="R:\My work\Projects\WebCore\WebCore\Scripts\">
     <Path>aramis.js</Path>
     <Path>aramis.admin.js</Path>
     <Path>aramis.consts.js</Path>
@@ -18,8 +18,8 @@
     <Path>Controls\jquery.mainTable.js</Path>
   </References>
 
-  <Solution Name="Sandbox tests" Url="http://localhost:50257" Directory="X:\My work\Projects\WebCore\SandBox.Web"
-            DesktopDirectory="X:\My work\Projects\UTK\Aramis.NET\SandboxDesktop\bin\Release">
+  <Solution Name="Sandbox tests" Url="http://localhost:50257" Directory="R:\My work\Projects\WebCore\SandBox.Web"
+            DesktopDirectory="R:\My work\Projects\UTK\Aramis.NET\SandboxDesktop\bin\Release">
     <Path>MatrixAdapterEditor.dll</Path>
     <Path>NPOI.dll</Path>
     <Path>ThoughtWorks.QRCode.dll</Path>
@@ -38,8 +38,8 @@
     </DesktopOnlyFiles>
   </Solution>
 
-  <Solution Name="Sandbox real" Url="http://localhost" Directory="X:\My work\Projects\WebCore\SandBox.Web"
-          DesktopDirectory="X:\My work\Projects\UTK\Aramis.NET\SandboxDesktop\bin\Release">
+  <Solution Name="Sandbox real" Url="http://localhost" Directory="R:\My work\Projects\WebCore\SandBox.Web"
+          DesktopDirectory="R:\My work\Projects\UTK\Aramis.NET\SandboxDesktop\bin\Release">
     <Path>MatrixAdapterEditor.dll</Path>
     <Path>NPOI.dll</Path>
     <Path>ThoughtWorks.QRCode.dll</Path>
@@ -58,8 +58,8 @@
     </DesktopOnlyFiles>
   </Solution>
 
-  <Solution Name="Greenhouse localhost" Url="http://localhost" Directory="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
-            DesktopDirectory="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
+  <Solution Name="Greenhouse localhost" Url="http://localhost" Directory="R:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
+            DesktopDirectory="R:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
 
     <Path>GreenhouseCore.dll</Path>
 
@@ -93,8 +93,8 @@
     </DesktopOnlyFiles>
   </Solution>
 
-  <Solution Name="Greenhouse" Url="http://utk-aramis.org" Directory="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
-            DesktopDirectory="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
+  <Solution Name="Greenhouse" Url="http://utk-aramis.org" Directory="R:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
+            DesktopDirectory="R:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
 
     <Path>GreenhouseCore.dll</Path>
 
@@ -128,8 +128,8 @@
     </DesktopOnlyFiles>
   </Solution>
 
-  <Solution Name="Greenhouse from office" Url="http://10.9.1.3" Directory="X:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
-            DesktopDirectory="X:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
+  <Solution Name="Greenhouse from office" Url="http://10.9.1.3" Directory="R:\My work\Projects\UTK\GreenHouse\Greenhouse.Web"
+            DesktopDirectory="R:\My work\Projects\UTK\GreenHouse\Greenhouse\bin\Release">
 
     <Path>GreenhouseCore.dll</Path>
 
@@ -163,25 +163,4 @@
     </DesktopOnlyFiles>
   </Solution>
 
-  <Solution Name="Trade house" Url="http://ppk-aramis.in.ua" Directory="X:\My work\Projects\WebCore\TradeHouse.Web"
-            DesktopDirectory="X:\My work\Projects\UTK\Aramis.NET\TradeHouseDesktop\bin\Release">
-
-    <Path>Aramis system.dll</Path>
-    <Path>ReportView.dll</Path>
-    <Path>MatrixReportViewBuilder.dll</Path>
-    <Path>RepositoryOfMatrixReportData.dll</Path>
-    <Path>AramisInfrastructure.dll</Path>
-    <Path>DBInteraction.dll</Path>
-    <Path>TableViewInterfaces.dll</Path>
-    <Path>AramisWpfComponents.dll</Path>
-    <Path>TradeHouseCore.dll</Path>
-
-    <DesktopOnlyFiles>
-      <Path>TradeHouse.exe</Path>
-      <Path>AramisDesktopUserInterface.dll</Path>
-      <Path>AramisEmailHelper.dll</Path>
-      <Path>AramisWPFLibriary.dll</Path>
-      <Path>MatrixAdapterEditor.dll</Path>
-    </DesktopOnlyFiles>
-  </Solution>
 </Root>

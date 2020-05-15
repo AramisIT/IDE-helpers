@@ -1,4 +1,9 @@
-﻿const TEXT_NODE = 3;
+﻿const requestName = 
+(((document.querySelectorAll("#id_source_group .branch.unabridged a")[0] || {}).childNodes || [])[0] || {}).nodeValue || '';
+
+const taskNumber = Number(requestName ? requestName.match(/(?<=\/BD-)([0-9]+)/)[0] : 0);
+
+const TEXT_NODE = 3;
 let processElement, isDumbFile, containsDumbFileName, hideNode;
 
 hideNode = el => el.style.display = 'none';
@@ -20,6 +25,19 @@ const container = document.createElement('div');
 container.style.cssText = 'text-align:center;font-size:16px;padding:1em;position:fixed;bottom:0px;right:0px;width:4em;line-height:1.5em;height:1.5em;opacity:0.9;z-index:10000;background:lime';
 container.id="time-spends-value";
 document.body.appendChild(container);
+
+if (taskNumber) {
+	container.style.cursor = "pointer";
+	container.onclick = e => {
+		const jiraWindow = window.open(`https://bytdyt.atlassian.net/secure/RapidBoard.jspa?rapidView=10&projectKey=BD&modal=detail&selectedIssue=BD-${taskNumber}`, '_blank');
+
+		jiraWindow.addEventListener("load", () => {
+			console.log('loaded');
+		});
+		
+		jiraWindow.focus();
+	};
+}
 
 const pad2 = num => {
 	const s = "0" + num;

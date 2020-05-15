@@ -402,8 +402,7 @@ namespace AramisIDE.SolutionUpdating
 
         private bool checkIsReactSourceFolder(DirectoryInfo dir)
             {
-            return dir.Name.EndsWith("-react", StringComparison.InvariantCultureIgnoreCase) 
-                || dir.Name.Equals("react", StringComparison.InvariantCultureIgnoreCase);
+            return dir.Name.EndsWith("GreenhouseMapVisualizer-react", StringComparison.InvariantCultureIgnoreCase);
             }
 
         private bool checkIsJavascriptDevelopmentModeFile(FileInfo file, DirectoryInfo dir)

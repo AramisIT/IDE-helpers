@@ -19,11 +19,11 @@ namespace AramisIDE.Interface
             CopyIpAddress,
             MakeCatalog,
             MakeDocument,
-            MakeCatalogGuid,
-            MakeDocumentGuid,
+            //MakeCatalogGuid,
+            //MakeDocumentGuid,
             StartDateAndFinishDate,
             CreateRestoreScript,
-            ShowGrayImageFromBase64String,
+            //ShowGrayImageFromBase64String,
             Quit
             }
 
@@ -77,11 +77,11 @@ namespace AramisIDE.Interface
             var result = new List<string>() {
         "Make catalog Win-Alt-C",
         "Make document Win-Alt-L",
-        "Make catalog guid",
-        "Make document guid",
+        //"Make catalog guid",
+        //"Make document guid",
         "StartDate and FinishDate",
         "Create restore script",
-        "Show gray image",
+        //"Show gray image",
         "Quit" };
 
             result.Insert(0, getCopyWirelessAddressCommand());
@@ -316,17 +316,17 @@ namespace AramisIDE.Interface
                     new RestoreScriptCreator();
                     return;
 
-                case MenuItems.ShowGrayImageFromBase64String:
-                    new ImageViewer().Show();
-                    return;
+                //case MenuItems.ShowGrayImageFromBase64String:
+                //    new ImageViewer().Show();
+                //    return;
 
-                case MenuItems.MakeCatalogGuid:
-                    new CatalogGuid();
-                    return;
+                //case MenuItems.MakeCatalogGuid:
+                //    new CatalogGuid();
+                //    return;
 
-                case MenuItems.MakeDocumentGuid:
-                    new DocumentGuid();
-                    return;
+                //case MenuItems.MakeDocumentGuid:
+                //    new DocumentGuid();
+                //    return;
 
                 case MenuItems.StartDateAndFinishDate:
                     new CurrentDayPeriod();
