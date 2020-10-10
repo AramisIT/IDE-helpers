@@ -7,16 +7,22 @@ using Aramis.SystemConfigurations;
 using Catalogs;
 
 namespace Documents
-    {{    
+    {{
     [Document(Description = "", GUID = "{0}")]
     public interface {1} : IDocument
-        {{    
-		Table<IExsTable> ExsTable {{ get; }}  
-        }}        
+        {{
+		Table<IExsTable> ExsTable {{ get; }}
+        }}
 
     public interface IExsTable : ITableRow
         {{
         [DataField(Description = "")]
-        Ref<IExsCatalog> ExsField {{ get; set; }}      
+        Ref<IExsCatalog> ExsField {{ get; set; }}
         }}
+
+    public class {1}Behaviour : Behavior<{1}>
+        {
+        public {1}Behaviour({1} item)
+            : base(item) { }
+        }
     }}

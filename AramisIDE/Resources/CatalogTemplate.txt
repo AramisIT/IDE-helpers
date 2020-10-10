@@ -7,17 +7,23 @@ using Aramis.SystemConfigurations;
 using Catalogs;
 
 namespace Catalogs
-    {{    
+    {{
     [Catalog(Description = "", FieldCaptionInUI = "", GUID = "{0}", DescriptionSize = 35, HierarchicType = HierarchicTypes.None, ShowCodeFieldInForm = false, ShowCreationDate = true, ShowLastModifiedDate = true)]
     public interface {1} : ICatalog
         {{
-        [DataField(Description = "Настройки")]		    
-		Table<{1}Row> Settings {{ get; }}  
-        }}        
+        [DataField(Description = "Настройки")]
+		Table<{1}Row> Settings {{ get; }}
+        }}
 
     public interface {1}Row : ITableRow
         {{
         [DataField(Description = "")]
-        Ref<IExsCatalog> ExsField {{ get; set; }}      
+        Ref<IExsCatalog> ExsField {{ get; set; }}
         }}
+
+    public class {1}Behaviour : Behavior<{1}>
+        {
+        public {1}Behaviour({1} item)
+            : base(item) { }
+        }
     }}
